@@ -20,7 +20,7 @@ const getApiInfo = async () => {
         p.id = url.data.id;
         p.img = url.data.sprites.other.home.front_default;
         p.hp = url.data.stats[0].base_stat;
-        p.strength = url.data.stats[1].base_stat;
+        p.attack = url.data.stats[1].base_stat;
         p.defense = url.data.stats[2].base_stat;
         p.speed = url.data.stats[5].base_stat;
         p.height = url.data.height;
@@ -65,7 +65,7 @@ const getApiInfo = async () => {
       }
 
   })
-
+//GET TYPES
   router.get('/types', async (req,res)=>{
  
    
@@ -84,6 +84,39 @@ const getApiInfo = async () => {
     res.send(allTypes)
   
   })
+//CREACION DE UN POKEMON
+  router.post('/pokemons', async(req,res)=>{
+    const{ 
+    name,life,attack,defense,speed,height,weight, img, itsCreated, type}=req.body;
+
+let pokemonCreated = await Pokemon.create({
+  name,
+  life,
+  attack,
+  defense,
+  speed,
+  height,
+  weight,
+  img,
+  itsCreated
+})
+
+let typeDb = await Type.findAll({
+  where:{name:type}
+})
+pokemonCreated.addType(typeDb)
+res.send('Pokemon creado exitosamente')
+  })
   
+router.get('/pokemons/:id', async(req,res)=>{
+  const{id}=req.params;
+  const pokesTotal= await getAllPokemons();
+  if(id){
+    let pokeId= await pokesTotal.filter(elem=>elem.id==id)
+    pokeId.length?
+    res.status(200).json(pokeId):
+    res.status(404).send('El poke no existe')
+  }
+})
 module.exports = router;
 // module.exports = getApiInfo;
