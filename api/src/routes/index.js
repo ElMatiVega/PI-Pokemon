@@ -12,8 +12,11 @@ const getApiInfo = async () => {
     try {
       // aca me traigo todos los 40 pokemones
       const apiResults = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
+      //console.log(apiResults)
       const apiNext = await axios.get(apiResults.data.next);
+      //console.log(apiNext)
       const allPokemons = apiResults.data.results.concat(apiNext.data.results);
+     console.log(allPokemons)
       for (let p of allPokemons) {
         let url = await axios.get(p.url);
         delete p.url;
@@ -27,6 +30,7 @@ const getApiInfo = async () => {
         p.weight = url.data.weight;
         p.type = url.data.types.map((el) => el.type.name);
       }
+      //console.log(allPokemons)
       return allPokemons;
     } catch (error) {
       console.log(error);
@@ -52,6 +56,9 @@ const getApiInfo = async () => {
       return infoTotal
   }
 //get/pokemons y get/pokemonsQuery
+
+
+
   router.get('/pokemons', async (req,res)=>{
       const name=req.query.name;
       let pokemonsTotal=await getAllPokemons();
@@ -65,23 +72,28 @@ const getApiInfo = async () => {
       }
 
   })
-//GET TYPES
+
+
+//Pedido de  TYPES
   router.get('/types', async (req,res)=>{
- 
-   
-      const typesApi= await axios.get('https://pokeapi.co/api/v2/type');
+ try {
+  const typesApi= await axios.get('https://pokeapi.co/api/v2/type');
      
-      const typesApi2= typesApi.data.results;
-      
-      const onlyTypes =await typesApi2.map(elem=>elem.name);
-      
-      onlyTypes.forEach((type) => {
-        Type.findOrCreate({ 
-          where: { name: type } 
-        });
-    })
-    const allTypes= await Type.findAll();
-    res.send(allTypes)
+  const typesApi2= typesApi.data.results;
+  
+  const onlyTypes =await typesApi2.map(elem=>elem.name);
+  
+  onlyTypes.forEach((type) => {
+    Type.findOrCreate({ 
+      where: { name: type } 
+    });
+})
+const allTypes= await Type.findAll();
+res.status(200).json(allTypes)
+ } catch (error) {
+   res.status(404).send(error)
+ }
+     
   
   })
 //CREACION DE UN POKEMON
@@ -108,7 +120,10 @@ pokemonCreated.addType(typeDb)
 res.send('Pokemon creado exitosamente')
   })
   
-router.get('/pokemons/:id', async(req,res)=>{
+
+
+//Pedido de info según ID
+  router.get('/pokemons/:id', async(req,res)=>{
   const{id}=req.params;
   const pokesTotal= await getAllPokemons();
   if(id){
