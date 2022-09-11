@@ -110,9 +110,11 @@ __Pagina inicial__LandingPage: deben armar una landing page con
 
 __Ruta principal__Home: debe contener 
 
-- [ ] SearchBar/NavBar 
+- [ ]
+ <!-- SearchBar/NavBar  -->
   Input de búsqueda para encontrar pokemons por nombre (La búsqueda será exacta, es decir solo encontrará al pokemon si se coloca el nombre completo)
-- [ ] Card y Cards
+- [ ] 
+<!-- Card y Cards -->
   Área donde se verá el listado de pokemons. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta `GET /pokemons` y deberá mostrar su:
   - Imagen
   - Nombre

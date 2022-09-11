@@ -4,7 +4,11 @@ import {Link} from 'react-router-dom';
 function LandingPage() {
   return (
     <div className=''>
-      <h1>Bienvenidos a PokePagina</h1>
+      <h1>Bienvenidos a la PokePagina</h1>
+    {/* hacer pokeJuego, probar un renderizado ternario para poder mostrar distintos componentes. */}
+
+
+
       <Link to='/home' >
           <button className=''>Vamos</button>
       </Link>

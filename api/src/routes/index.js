@@ -12,11 +12,11 @@ const getApiInfo = async () => {
     try {
       // aca me traigo todos los 40 pokemones
       const apiResults = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
-      //console.log(apiResults)
+     //console.log(apiResults)
       const apiNext = await axios.get(apiResults.data.next);
       //console.log(apiNext)
       const allPokemons = apiResults.data.results.concat(apiNext.data.results);
-     console.log(allPokemons)
+     //console.log(allPokemons)
       for (let p of allPokemons) {
         let url = await axios.get(p.url);
         delete p.url;
@@ -55,9 +55,11 @@ const getApiInfo = async () => {
       const infoTotal= apiInfo.concat(dbInfo);
       return infoTotal
   }
-//get/pokemons y get/pokemonsQuery
 
 
+
+
+  //get/pokemons y get/pokemonsQuery
 
   router.get('/pokemons', async (req,res)=>{
       const name=req.query.name;
