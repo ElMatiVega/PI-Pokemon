@@ -3,10 +3,23 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getPokemons} from '../actions';
 import {Link} from 'react-router-dom';
 import Card from './Card';
+import Pagination from './Pagination'
 
 function Home() {
     const dispatch= useDispatch();
-    const allPokemons= useSelector((state)=> state.pokemons);
+    const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
+    
+    
+    //PAGINADO
+    const [currentPage, setCurrentPage]= useState(1);
+    const [PokesForPage, setPokesForPage]= useState(12);//es el número de pokes por pagina
+    const lastPokePage= currentPage * PokesForPage;// 12
+    const firstPokePage= lastPokePage - PokesForPage;//0
+    const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);
+
+    const pagination=(pageNumber)=>{
+        setCurrentPage(pageNumber)
+    }
 
     useEffect(()=>{
         dispatch(getPokemons())
@@ -19,6 +32,12 @@ function Home() {
 
     return (
     <div>
+          <Pagination
+          PokesForPage={PokesForPage}//Estado local
+          allPokemons={allPokemons.length}//useSelector-->state.Pokemons
+          pagination={pagination}
+
+          />
       <Link to='/pokemons'>Crea tu Pokemon</Link>
       <h1>Hola pokemon!!!</h1>
       <button onClick={event=>{handlerBack(event)}}>
@@ -56,17 +75,22 @@ function Home() {
               <option value="Created">Creados</option>
               <option value="Existentes">Existentes</option>
           </select>
+
+         
+
+
           {
-             allPokemons?.map(poke=>{
+             currentPokes && currentPokes.map(poke=>{
                   return(
                       <>
-                        <Link to={`/home/${poke.id}`} >
-                        <Card name={poke.name} image={poke.img} type={poke.type}/>
+                        <Link to={`/home/${poke.id}`}  target="_blank" >
+                        <Card name={poke.name} image={poke.img} type={poke.type} key={poke.id}/>
                         </Link>
                       </>
                   )
               })
           }
+         
       </div>
     </div>
   )

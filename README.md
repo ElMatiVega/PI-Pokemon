@@ -116,7 +116,7 @@ __Ruta principal__Home: debe contener
 - [ ] 
 <!-- Card y Cards -->
   Área donde se verá el listado de pokemons. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta `GET /pokemons` y deberá mostrar su:
-  - Imagen
+  - Imagen   para q salgo
   - Nombre
   - Tipos (Electrico, Fuego, Agua, etc)
 - [ ] Botones/Opciones para filtrar por tipo de pokemon y por pokemon existente o creado por nosotros
