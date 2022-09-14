@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPokemons} from '../actions';
+import {getPokemons,filterCreated} from '../actions';
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Pagination from './Pagination'
@@ -12,7 +12,7 @@ function Home() {
     
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
-    const [PokesForPage, setPokesForPage]= useState(12);//es el número de pokes por pagina
+    const [PokesForPage]= useState(12);//es el número de pokes por pagina
     const lastPokePage= currentPage * PokesForPage;// 12
     const firstPokePage= lastPokePage - PokesForPage;//0
     const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);
@@ -23,11 +23,21 @@ function Home() {
 
     useEffect(()=>{
         dispatch(getPokemons())
-    },[dispatch])
+    },[])
 
     function handlerBack (e){
         e.preventDefault();
         dispatch(getPokemons())
+    }
+
+    // function handlerFilterTypes(e){
+    //     e.preventDefault(e);
+    //     dispatch( filterPokesbyType(e.target.value))
+        
+    // }
+
+    function handleFfilterCreated(e){
+        dispatch (filterCreated(e.target.value)) 
     }
 
     return (
@@ -48,29 +58,32 @@ function Home() {
             <option value="asc">Ascendente</option>
             <option value="desc">Descendente</option>
           </select>
-          <select>
-              <option value="Normal">normal</option>
-              <option value="Flying">flying</option>
-              <option value="Fighting">fighting</option>
-              <option value="Poison">poison</option>
-              <option value="Ground">ground</option>
-              <option value="Bug">bug</option>
-              <option value="Ghost">ghost</option>
-              <option value="Steel">steel</option>
-              <option value="Rock">rock</option>
-              <option value="Fire">fire</option>
-              <option value="Water">water</option>
-              <option value="Grass">grass</option>
-              <option value="Electric">electric</option>
-              <option value="Psychic">psychic</option>
-              <option value="Ice">ice</option>
-              <option value="Dragon">dragon</option>
-              <option value="Dark">dark</option>
-              <option value="Fairy">fairy</option>
-              <option value="Unknown">unknown</option>
-              <option value="Shadow">shadow</option>
+      {/* <select onChange={event=>handlerFilterTypes(event)}> */}
+          <select >
+              <option value="normal">normal</option>
+              <option value="flying">flying</option>
+              <option value="fighting">fighting</option>
+              <option value="poison">poison</option>
+              <option value="ground">ground</option>
+              <option value="bug">bug</option>
+              <option value="ghost">ghost</option>
+              <option value="steel">steel</option>
+              <option value="rock">rock</option>
+              <option value="fire">fire</option>
+              <option value="water">water</option>
+              <option value="grass">grass</option>
+              <option value="electric">electric</option>
+              <option value="psychic">psychic</option>
+              <option value="ice">ice</option>
+              <option value="dragon">dragon</option>
+              <option value="dark">dark</option>
+              <option value="fairy">fairy</option>
+              <option value="unknown">unknown</option>
+              <option value="shadow">shadow</option>
           </select>
-          <select>
+
+
+          <select onChange={event=>handleFfilterCreated(event)} >
               <option value="All">Todos</option>
               <option value="Created">Creados</option>
               <option value="Existentes">Existentes</option>
@@ -81,11 +94,19 @@ function Home() {
 
           {
              currentPokes && currentPokes.map(poke=>{
+                 console.log(currentPokes)
                   return(
                       <>
                         <Link to={`/home/${poke.id}`}  target="_blank" >
-                        <Card name={poke.name} image={poke.img} type={poke.type} key={poke.id}/>
+                        <Card
+                            key={poke.id}
+                            name={poke.name} 
+                            image={poke.img} 
+                            type={poke.type.join(' || ')}
+                        />
+                        
                         </Link>
+                
                       </>
                   )
               })

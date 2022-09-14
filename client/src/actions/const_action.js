@@ -1,0 +1,4 @@
+// const GET_POKEMONS ='GET_POKEMONS';
+// const FILTER_BY_TYPE='FILTER_BY_TYPE';
+
+// module.exports={GET_POKEMONS,FILTER_BY_TYPE}
