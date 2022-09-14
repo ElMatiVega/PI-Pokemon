@@ -22,6 +22,33 @@ function rootReducer(state= initialState, action){
                 ...state,
                 pokemons:action.payload === 'All' ? allPokes : pokeCreatedFilter
             }
+        
+        case 'ORDER_ALFHABETIC':
+            let sortPokes= action.payload ==='asc'?
+            state.pokemons.sort(function (a, b) {
+                if (a.name > b.name) {
+                  return 1;
+                }
+                if (a.name < b.name) {
+                  return -1;
+                }
+                // a === b
+                return 0;
+              }) :
+              state.pokemons.sort(function (a, b) {
+                if (a.name < b.name) {
+                  return 1;
+                }
+                if (a.name > b.name) {
+                  return -1;
+                }
+          
+                return 0;
+              });
+              return{
+                  ...state,
+                  pokemons:sortPokes
+              }
 
 
 

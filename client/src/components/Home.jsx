@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPokemons,filterCreated} from '../actions';
+import {getPokemons,filterCreated, orderAlfhabetic} from '../actions';
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Pagination from './Pagination'
@@ -16,10 +16,22 @@ function Home() {
     const lastPokePage= currentPage * PokesForPage;// 12
     const firstPokePage= lastPokePage - PokesForPage;//0
     const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);
+  
 
     const pagination=(pageNumber)=>{
         setCurrentPage(pageNumber)
     }
+
+  //Ordenar ALFABETICAMENTE
+  const [order, setOrder]= useState('')
+
+  function handlerSort(e){
+    e.preventDefault();
+    dispatch(orderAlfhabetic(e.target.value))
+    setCurrentPage(1);
+    setOrder(`Ordenado ${e.target.value}`)
+  }
+
 
     useEffect(()=>{
         dispatch(getPokemons())
@@ -54,9 +66,9 @@ function Home() {
           Volver a cargar todos los pokemones
       </button>
       <div>
-          <select>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
+          <select onChange={event=>handlerSort(event)}>
+            <option value="asc">A-Z</option>// el value es el payload del reducer
+            <option value="desc">Z-A</option>
           </select>
       {/* <select onChange={event=>handlerFilterTypes(event)}> */}
           <select >
@@ -102,7 +114,8 @@ function Home() {
                             key={poke.id}
                             name={poke.name} 
                             image={poke.img} 
-                            type={poke.type.join(' || ')}
+                            type={poke.type}
+                            
                         />
                         
                         </Link>

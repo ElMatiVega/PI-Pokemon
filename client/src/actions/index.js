@@ -18,6 +18,13 @@ export function filterCreated(pokeDB){
     }
 }
 
+export function orderAlfhabetic(payload){
+    return{
+        type:'ORDER_ALFHABETIC',
+        payload
+    }
+}
+
 
 
 // export function filterPokesbyType (){
