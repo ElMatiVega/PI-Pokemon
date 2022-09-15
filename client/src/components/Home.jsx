@@ -4,6 +4,7 @@ import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderA
 import {Link} from 'react-router-dom';
 import Card from './Card';
 import Pagination from './Pagination'
+import SearchBar from './SearchBar';
 
 function Home() {
     const dispatch= useDispatch();
@@ -134,6 +135,13 @@ function handlerAttack(e){
                   <option value="Poderoso">Poderoso</option>
                 </select>
 
+          
+          <SearchBar
+           setInput={setInput}
+           setCurrentPage={setCurrentPage}
+           setSelected={setSelected}
+          />
+
 
           {
              currentPokes && currentPokes.map(poke=>{
@@ -147,7 +155,7 @@ function handlerAttack(e){
                             image={poke.img} 
                             type={poke.type}
                             
-                        />
+                          />
                         
                         </Link>
                 

@@ -38,7 +38,6 @@ export function orderAttack(payload){
 export function getTypes(){
     return async function(dispatch){
         var json = await axios.get("http://localhost:3001/types");
-console.log(json.data)
        return dispatch({
            type:'GET_TYPE',
            payload: json.data, 
@@ -46,9 +45,28 @@ console.log(json.data)
     }
 }
 
-export const filterByType = (payload) => {
+export function filterByType (payload) {
     return {
       type: 'FILTER_BY_TYPE',
       payload,
     };
   };
+  
+  
+  //BUSCO INFO QUERY
+
+export function getNamePokemons(name){
+    return async function(dispatch){
+        try {
+            var pokeJson= await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+            return dispatch({
+                type:"GET_NAME_POKEMONS",
+                payload:pokeJson.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+}
+

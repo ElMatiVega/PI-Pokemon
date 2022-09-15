@@ -93,6 +93,9 @@ function rootReducer(state= initialState, action){
           let pokeAttack=state.pokemons
           let sortPokeAttack= action.payload ==='Debil'?
           pokeAttack.sort(function (a, b) {
+            if (a.attack=== null) {
+              return 0;
+          }
               if (a.attack > b.attack) {
                 return 1;
               }
@@ -103,6 +106,9 @@ function rootReducer(state= initialState, action){
               return 0;
             }) :
             pokeAttack.sort(function (a, b) {
+              if (a.attack === null) {
+                return 0;
+            }
               if (a.attack < b.attack) {
                 return 1;
               }
@@ -115,6 +121,12 @@ function rootReducer(state= initialState, action){
                 ...state,
                 pokemons:sortPokeAttack
             }
+
+        case "GET_NAME_POKEMONS":
+          return{
+            ...state,
+            pokemons:action.payload
+          }
 
         // case 'FILTER_BY_TYPE':
         //         const allPokemons = state.pokemons
