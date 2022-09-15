@@ -25,14 +25,30 @@ export function orderAlfhabetic(payload){
     }
 }
 
+export function orderAttack(payload){
+    return{
+        type:'ORDER_ATTACK',
+        payload
+    }
+}
 
 
-// export function filterPokesbyType (){
-//     return async function(dispatch){
-//         var json = await axios.get("http://localhost:3001/types");
-//        return dispatch({
-//            type:'FILTER_BY_TYPE',
-//            payload: json.data, 
-//        })
-//     }
-// }
+
+
+export function getTypes(){
+    return async function(dispatch){
+        var json = await axios.get("http://localhost:3001/types");
+console.log(json.data)
+       return dispatch({
+           type:'GET_TYPE',
+           payload: json.data, 
+       })
+    }
+}
+
+export const filterByType = (payload) => {
+    return {
+      type: 'FILTER_BY_TYPE',
+      payload,
+    };
+  };
