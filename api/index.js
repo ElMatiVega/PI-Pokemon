@@ -9,3 +9,5 @@ conn.sync({ force: false }).then(() => {
     console.log('; ) listening at 3001'); // eslint-disable-line no-console
   });
 });
+// server.listen(process.env.PORT, () => {
+//   console.log("%s listening at 3001")

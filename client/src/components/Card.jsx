@@ -1,12 +1,12 @@
 import React from 'react';
-import { version } from 'react';
 
+//prop vienen del home
 function Card({name, image, type,attack}) {
   return (
     <div>
       <h3> {name}</h3>
       <img src={image} alt="PokeImagen" width="200px" heigth="250px" />
-      <h4>Tipo= {type.join(' ')}</h4><br />
+      <h4>Tipo= {type}</h4><br />
       
     </div>
   )

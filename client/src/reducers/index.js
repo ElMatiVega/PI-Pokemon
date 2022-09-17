@@ -122,11 +122,17 @@ function rootReducer(state= initialState, action){
                 pokemons:sortPokeAttack
             }
 
-        case "GET_NAME_POKEMONS":
+        case "GET_NAME_POKEMONS"://para el searchBar
           return{
             ...state,
             pokemons:action.payload
           }
+
+          case "POST_POKEMON":
+            return{
+              ...state,
+            }
+            
 
         // case 'FILTER_BY_TYPE':
         //         const allPokemons = state.pokemons

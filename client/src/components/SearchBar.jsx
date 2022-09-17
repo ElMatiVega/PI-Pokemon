@@ -4,7 +4,7 @@ import{useDispatch} from 'react-redux';
 import {getNamePokemons} from '../actions/index';
 
 //import "./styles/SearchBar.css";
-import SearchIcon from "./asset/Pika.png";
+import SearchIcon from "./Img&Gif/Pika.png";
 
 const SearchBar = ({ setInput, setCurrentPage, setSelected }) => {
   const dispatch = useDispatch();

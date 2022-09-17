@@ -79,13 +79,18 @@ function handlerAttack(e){
 
     return (
     <div>
+       <Link to='/belloPoke'>Haz tu Poke</Link>   
+      
+      
+          
+          
           <Pagination
           PokesForPage={PokesForPage}//Estado local
           allPokemons={allPokemons.length}//useSelector-->state.Pokemons
           pagination={pagination}
 
           />
-      <Link to='/pokemons'>Crea tu Pokemon</Link>
+      
       <h1>Hola pokemon!!!</h1>
       <button onClick={event=>{handlerBack(event)}}>
           Volver a cargar todos los pokemones

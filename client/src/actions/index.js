@@ -34,26 +34,15 @@ export function orderAttack(payload){
 
 
 
-
-export function getTypes(){
-    return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/types");
-       return dispatch({
-           type:'GET_TYPE',
-           payload: json.data, 
-       })
-    }
-}
-
-export function filterByType (payload) {
-    return {
-      type: 'FILTER_BY_TYPE',
-      payload,
-    };
-  };
+// export function filterByType (payload) {
+//     return {
+//       type: 'FILTER_BY_TYPE',
+//       payload,
+//     };
+//   };
   
   
-  //BUSCO INFO QUERY
+  //BUSCO INFO QUERY para searchBar
 
 export function getNamePokemons(name){
     return async function(dispatch){
@@ -69,4 +58,23 @@ export function getNamePokemons(name){
        
     }
 }
+
+//Para crear poke
+export function getTypes(){
+    return async function(dispatch){
+        var json = await axios.get("http://localhost:3001/types");
+       return dispatch({
+           type:'GET_TYPE',
+           payload: json.data, 
+       })
+    }
+}
+//Post para agregar un poke
+export function postPokemon(payload){
+    return async function(dispatch){
+        const info= await axios.post("http://localhost:3001/pokemons",payload)
+        return info;
+    }
+}
+
 
