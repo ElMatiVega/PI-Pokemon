@@ -41,7 +41,6 @@ const [order, setOrder]= useState('')
 function handlerSort(e){
     e.preventDefault();
     dispatch(orderAlfhabetic(e.target.value))
-    dispatch(orderAttack())
     setCurrentPage(1);
     setOrder(`Ordenado ${e.target.value}`)
   }
@@ -160,12 +159,12 @@ function handlerAttack(e){
                             name={poke.name} 
                             image={poke.img} 
                             type={poke.type}
+                            vida={poke.hp}
+                            ataque={poke.attack}
                             
                           />
-                        
-                        </Link>
-                
-                      </>
+                        </Link>                       
+                     </>
                   )
               })
           }

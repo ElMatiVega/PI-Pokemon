@@ -14,27 +14,37 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique:true,
     },
-    life:{
-      type:DataTypes.INTEGER
+    hp:{
+      type:DataTypes.INTEGER,
+      validate: { min: 1, max: 200 }
     },
     attack:{
-      type:DataTypes.INTEGER
+      type:DataTypes.INTEGER,
+      validate: { min: 1, max: 200 }
     },
     defense:{
-      type:DataTypes.INTEGER
+      type:DataTypes.INTEGER,
+      validate: { min: 1, max: 200 }
     },
     speed:{
-      type:DataTypes.INTEGER
+      type:DataTypes.INTEGER,
+      validate: { min: 1, max: 200 }
     },
     height:{
-      type:DataTypes.INTEGER
+      type:DataTypes.INTEGER,
+      validate: { min: 1, max: 200 }
     },
     weight:{
-      type:DataTypes.INTEGER
+      type:DataTypes.INTEGER,
+      validate: { min: 1, max: 200 }
     },
     img:{
       type:DataTypes.STRING,
+      defaultValue:
+      "https://c.tenor.com/llY4dBe08RkAAAAi/pikachu.gif",
+    validate: { isUrl: true },
     },
     itsCreated: {
       type: DataTypes.BOOLEAN,

@@ -11,7 +11,7 @@ const router = Router();
 const getApiInfo = async () => {
     try {
       // aca me traigo todos los 40 pokemones
-      const apiResults = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
+      const apiResults = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=126`);
      //console.log(apiResults)
       const apiNext = await axios.get(apiResults.data.next);
       //console.log(apiNext)
@@ -28,7 +28,7 @@ const getApiInfo = async () => {
         p.speed = url.data.stats[5].base_stat;
         p.height = url.data.height;
         p.weight = url.data.weight;
-        p.type = url.data.types.map((el) => el.type.name);
+        p.type =url.data.types.map((el) => el.type.name+" ");
       }
       //console.log(allPokemons)
       return allPokemons;
@@ -101,11 +101,11 @@ res.status(200).json(allTypes)
 //CREACION DE UN POKEMON
   router.post('/pokemons', async(req,res)=>{
     const{ 
-    name,life,attack,defense,speed,height,weight, img, itsCreated, type}=req.body;
+    name,hp,attack,defense,speed,height,weight, img, itsCreated, type}=req.body;
 
 let pokemonCreated = await Pokemon.create({
   name,
-  life,
+  hp,
   attack,
   defense,
   speed,

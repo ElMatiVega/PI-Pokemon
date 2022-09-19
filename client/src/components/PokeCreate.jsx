@@ -12,7 +12,7 @@ function PokeCreate() {
     const pokesTypes= useSelector((state)=> state.types)
     const [input, setInput]= useState({
       name:'',
-      life:'',
+      hp:'',
       attack:'',
       defense:'',
       speed:'',
@@ -36,13 +36,20 @@ function PokeCreate() {
     })
   }
 
+  function handleDelete(tipo) {
+    setInput({
+      ...input,
+      types: input.types.filter((t) => t !== tipo),
+    });
+  }
+
 function handleSubmit(e){
   e.preventDefault();
   dispatch(postPokemon(input));
   alert("Pokemon creado");
   setInput({
     name:'',
-    life:'',
+    hp:'',
     attack:'',
     defense:'',
     speed:'',
@@ -79,8 +86,8 @@ function handleSubmit(e){
          <label>Vida:</label>
          <input 
          type="number" 
-        //  value={input.life}
-          name='life'
+        //  value={input.hp}
+          name='hp'
           onChange={handleChange}/>
        </div>
       <div>
@@ -142,7 +149,12 @@ function handleSubmit(e){
        <button >Crear</button>
        </div>
      </form>
-    
+    {input.types.map(elem=>
+    <div>
+      <p>{elem}</p>
+      <button onClick={()=>handleDelete(elem)}>X</button>
+    </div>
+    )}
    
     </div>
   )
