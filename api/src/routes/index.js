@@ -112,6 +112,7 @@ let pokemonCreated = await Pokemon.create({
   height,
   weight,
   img,
+  type,
   itsCreated
 })
 

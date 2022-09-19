@@ -6,6 +6,7 @@ import Card from './Card';
 import Pagination from './Pagination'
 import SearchBar from './SearchBar';
 
+
 function Home() {
     const dispatch= useDispatch();
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
@@ -79,7 +80,7 @@ function handlerAttack(e){
 
     return (
     <div>
-       <Link to='/belloPoke'>Haz tu Poke</Link>   
+       <Link to='/PokeCreate'>Haz tu Poke</Link>   
       
       
           

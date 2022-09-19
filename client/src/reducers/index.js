@@ -26,7 +26,7 @@ function rootReducer(state= initialState, action){
         }
 
 
-        case 'GET_TYPES':
+        case 'GET_TYPE':
         return { ...state, types: action.payload };
 
 

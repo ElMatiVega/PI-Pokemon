@@ -6,6 +6,7 @@ import logo from '../components/Img&Gif/Logo.png';
 import gif from '../components/Img&Gif/Hand.gif';
 import linkedIn from "../components/Img&Gif/Icono_LinkedIn.png";
 import github from "../components/Img&Gif/Icon_github.png";
+import useTimeOut from './setTimeLanding';
 
 
 
@@ -63,15 +64,21 @@ import github from "../components/Img&Gif/Icon_github.png";
 
 
 const LandingPage = () => {
+function handlerSetTime(){
+
+}
+useTimeOut(()=> alert('Hello poke'),1000)
+  
   return (
     <div className={styles.BG}>
       <div className={styles.logoContainer}>
         <img className={styles.logoLanding} src={logo} alt="Pokeimage not found" />
       </div>
       <Link className={styles.Link} to={'/home'}>
-          <img  className={styles.pokeBola} src={pokeBall} />
-          <img className={styles.hand} src={gif} alt='gif'/>
-      </Link>
+
+        <img  className={styles.pokeBola} src={pokeBall} />
+       </Link>
+       <img className={styles.hand} src={gif} alt='gif'/> 
       
       <div className={styles.personalInfo}>
         <h2 className={styles.byMV}>Matías Vega</h2>
