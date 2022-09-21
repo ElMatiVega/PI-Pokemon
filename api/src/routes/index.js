@@ -38,15 +38,18 @@ const getApiInfo = async () => {
   };
 
   const getDbInfo = async ()=>{
-      return await  Pokemon.findAll({
-        include:{
-            model:Type,
-            attributes:['name'],
-            through:{
-                attributes:[],
-            }
-        }
+    
+     const pokemons= await  Pokemon.findAll({
+        include:Type,
+        // include:{
+        //     model:Type,
+        //     attributes:['name'],
+        //     through:{
+        //         attributes:[],
+        //     }
+        // }
       })
+     return pokemons
   }
 
   const getAllPokemons = async()=>{
@@ -101,7 +104,7 @@ res.status(200).json(allTypes)
 //CREACION DE UN POKEMON
   router.post('/pokemons', async(req,res)=>{
     const{ 
-    name,hp,attack,defense,speed,height,weight, img, itsCreated, type}=req.body;
+    name,hp,attack,defense,speed,height,weight, img, itsCreated, types}=req.body;
 
 let pokemonCreated = await Pokemon.create({
   name,
@@ -112,12 +115,12 @@ let pokemonCreated = await Pokemon.create({
   height,
   weight,
   img,
-  type,
+  types,
   itsCreated
 })
 
 let typeDb = await Type.findAll({
-  where:{name:type}
+  where:{name:types}
 })
 pokemonCreated.addType(typeDb)
 res.send('Pokemon creado exitosamente')
@@ -137,4 +140,4 @@ res.send('Pokemon creado exitosamente')
   }
 })
 module.exports = router;
-// module.exports = getApiInfo;
+

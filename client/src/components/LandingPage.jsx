@@ -6,66 +6,13 @@ import logo from '../components/Img&Gif/Logo.png';
 import gif from '../components/Img&Gif/Hand.gif';
 import linkedIn from "../components/Img&Gif/Icono_LinkedIn.png";
 import github from "../components/Img&Gif/Icon_github.png";
-// import useTimeOut from './setTimeLanding';
-
-
-
-// // function EstadoAhijo(props){
-// //     return(
-// //         <div>
-// //             <h3>{props.contadorHijo}</h3>
-// //         </div>
-// //     )
-// // }
-
-// function handlerLogo(){
-//     return(     
-      //  <div className={styles.logoContainer}>
-      //   <img className={styles.logoLanding} src={logo} alt="Pokeimage not found" />
-      //   </div>
-
-//     )
-// }
-// function Aviso(){
-//     return(
-//         <p>Bienvenidos a la PokeWeb</p>
-//     )
-
-// }
-// export default class Estado extends Component{
-//     constructor(props){
-//         super(props);
-//         this.state={
-//             contador:0,
-//         }
-//         setInterval(()=>{
-//             this.setState({
-//                 contador:this.state.contador+1
-//             });
-//         },1000);
-//     }
-//     render(){
-//         return(
-//             <div>
-//                 <h2>Hoy es el Cumpleaños de un pibe.</h2>
-                
-//                 {this.state.contador >=10? <Saludo/>:<Aviso />}
-               
-//                 {/* <p>{this.state.contador}</p>
-                
-//                 <EstadoAhijo contadorHijo={this.state.contador*2}/>  */}
-//             </div>
-//         );
-//     }
-// }
-
 
 
 
 
 const LandingPage = () => {
 
-// useTimeOut(()=> alert('Hello poke'),1000)
+
   
   return (
     <div className={styles.BG}>

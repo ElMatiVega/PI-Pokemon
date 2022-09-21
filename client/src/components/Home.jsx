@@ -3,14 +3,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderAttack } from '../actions';
 import {Link} from 'react-router-dom';
 import Card from './Card';
-import Pagination from './Pagination'
+import Pagination from './Pagination';
 import SearchBar from './SearchBar';
+import Loading from './Loading';
 
 
 function Home() {
     const dispatch= useDispatch();
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
-    const allTypes= useSelector((state)=>state.type)
+    const allTypes= useSelector((state)=>state.types)
     
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
@@ -76,15 +77,13 @@ function handlerAttack(e){
     function handleFfilterCreated(e){
         dispatch (filterCreated(e.target.value)) 
     }
-
+    
     return (
+      
     <div>
-       <Link to='/PokeCreate'>Haz tu Poke</Link>   
-      
-      
-          
-          
-          <Pagination
+       <Link to='/PokeCreate'>Haz tu Poke</Link> 
+         
+       <Pagination
           PokesForPage={PokesForPage}//Estado local
           allPokemons={allPokemons.length}//useSelector-->state.Pokemons
           pagination={pagination}
@@ -95,9 +94,9 @@ function handlerAttack(e){
       <button onClick={event=>{handlerBack(event)}}>
           Volver a cargar todos los pokemones
       </button>
-      <div>
+      
 
-     
+      <div>     
           <select defaultValue="title"  onChange={event=>handlerSort(event)}>
           <option value="title" selected={selected} disabled>
               Ordenar Alfabeticamente
@@ -153,15 +152,13 @@ function handlerAttack(e){
                  console.log(currentPokes)
                   return(
                       <>
-                        <Link to={`/home/${poke.id}`}  target="_blank" >
+                        <Link to={`/pokeDetails/${poke.id}`}  target="_blank" >
                         <Card
                             key={poke.id}
                             name={poke.name} 
                             image={poke.img} 
-                            type={poke.type}
-                            vida={poke.hp}
-                            ataque={poke.attack}
-                            
+                            type={ poke.itsCreated ? poke.types.map(t=>t.name+' '): poke.type }
+                                                    
                           />
                         </Link>                       
                      </>
@@ -173,6 +170,7 @@ function handlerAttack(e){
     </div>
   )
 }
+
 
 export default Home;
      {/* Filter TYPES */}
