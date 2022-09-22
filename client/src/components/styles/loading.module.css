@@ -1,20 +1,18 @@
-.loading {
-    width: auto;
-    height: auto;
-    margin-top: 150px;
-  }
+
   
   .loadingText {
+    color: #f6fa09;
     text-align: center;
     font-size: 40px;
     font-family: fantasy;
     margin-top: 10px;
     padding: 10px;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
+    -webkit-text-stroke: 1px #11388a;
   }
   
   .loadingContainer {
-    background: linear-gradient(to right, #4c81f3, #f6fa09);
+    background: linear-gradient(to right, #03256e, #f6fa09);
     background-repeat: no-repeat;
     background-size: auto 100%;
     position: fixed;
@@ -24,4 +22,54 @@
     left: 0;
     background-position: center center;
   }
+  .logoContainer {
+    display: flex;
+    justify-content:center;
+  }
   
+  .logoLanding {
+    width: 35em;
+    margin-top: 30px;
+    
+  
+  }
+  .loading {
+    width: auto;
+    height: auto;
+    margin-top: 50px;
+  }
+  .image{
+    width: 17em;
+    height: 15em;
+  }
+
+  @media screen and (max-width: 500px) {
+   
+    .logoLanding {
+      width: 25em;
+     }
+    
+  }
+
+  @media screen and (max-width: 400px) {
+   
+    .logoLanding {
+      width: 20em;
+     }
+    .image{
+      width: 16em;
+      height: 14em;
+    }
+  }
+
+  
+  @media screen and (max-width: 350px) {
+   
+    .logoLanding {
+      width: 18em;
+     }
+    .image{
+      width: 15em;
+      height: 13em;
+    }
+  }

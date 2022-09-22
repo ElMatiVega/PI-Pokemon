@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
       type:DataTypes.STRING,
       defaultValue:
       "https://c.tenor.com/llY4dBe08RkAAAAi/pikachu.gif",
-    validate: { isUrl: true },
+    // validate: { isUrl: true },
     },
     itsCreated: {
       type: DataTypes.BOOLEAN,

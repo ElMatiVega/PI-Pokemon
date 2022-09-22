@@ -2,7 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import{useEffect} from 'react';
-import {getDetail} from '../actions/index'
+import {getDetail} from '../actions/index';
+import Loading from '../components/Loading'
 
 function PokeDetails(props) {
     console.log(props)
@@ -32,7 +33,7 @@ function PokeDetails(props) {
         <p>Vida: {detailPoke[0].hp}</p>
         
       </div>
-      : <p>Loading...</p>
+      : <Loading/>
     }
     <Link to='/home'>
       <buttom>Volver</buttom>

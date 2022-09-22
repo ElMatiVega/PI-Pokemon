@@ -22,13 +22,14 @@ const getApiInfo = async () => {
         delete p.url;
         p.id = url.data.id;
         p.img = url.data.sprites.other.home.front_default;
+        //p.img2 = url.data.sprites.other['official-artwork'].front_default;
         p.hp = url.data.stats[0].base_stat;
         p.attack = url.data.stats[1].base_stat;
         p.defense = url.data.stats[2].base_stat;
         p.speed = url.data.stats[5].base_stat;
         p.height = url.data.height;
         p.weight = url.data.weight;
-        p.type =url.data.types.map((el) => el.type.name+" ");
+        p.type =url.data.types.map((el) => el.type.name.charAt(0).toUpperCase()+  el.type.name.slice(1)+' ');
       }
       //console.log(allPokemons)
       return allPokemons;

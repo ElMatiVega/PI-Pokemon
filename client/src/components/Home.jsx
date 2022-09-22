@@ -12,7 +12,7 @@ function Home() {
     const dispatch= useDispatch();
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
     const allTypes= useSelector((state)=>state.types)
-    
+    const [charge, setCharge] = useState(false)
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
     const [PokesForPage]= useState(12);//es el número de pokes por pagina
@@ -26,8 +26,10 @@ function Home() {
 
 
 useEffect(()=>{
-        dispatch(getPokemons())
-        dispatch(getTypes());
+      setCharge(true);
+      setTimeout(()=>{setCharge(false)}, 30000);
+      dispatch(getPokemons());
+      dispatch(getTypes());
     },[dispatch]);
 
 
@@ -41,133 +43,147 @@ const [order, setOrder]= useState('')
  //Ordenar ALFABETICAMENTE
 function handlerSort(e){
     e.preventDefault();
+    setCharge(true)
     dispatch(orderAlfhabetic(e.target.value))
     setCurrentPage(1);
     setOrder(`Ordenado ${e.target.value}`)
+    setTimeout(()=>{setCharge(false)}, 1000)
   }
 
 //order Attack
 
 function handlerAttack(e){
   e.preventDefault();
+  setCharge(true)
   dispatch(orderAttack(e.target.value))
   setOrder(`Ordenado ${e.target.value}`)
   setCurrentPage(1);
   setInput(1);
+  setTimeout(()=>{setCharge(false)}, 1000)
 }
 
-    useEffect(()=>{
-        dispatch(getPokemons())
-        dispatch(getTypes());
-    },[dispatch])
+    // useEffect(()=>{
+    //   setCharge(true)
+    //   setTimeout(()=>{setCharge(false)}, 40000)
+    //     dispatch(getPokemons())
+    //     dispatch(getTypes());
+    // },[dispatch])
 
     function handlerBack (e){
         e.preventDefault();
+        setCharge(true)
         dispatch(getPokemons());
-        
+        setTimeout(()=>{setCharge(false)}, 1000)
     }
 
     const handleTypeOptions = (e) => {
         e.preventDefault(e);
+        setCharge(true)
         dispatch(getTypes(e.target.value));
         setInput(1);
         setCurrentPage(1);
+        setTimeout(()=>{setCharge(false)}, 1000)
       };
 
     function handleFfilterCreated(e){
-        dispatch (filterCreated(e.target.value)) 
+      setCharge(true)
+      dispatch (filterCreated(e.target.value)) 
+      setTimeout(()=>{setCharge(false)}, 1000)
     }
     
-    return (
+return (
+  <div>
       
-    <div>
-       <Link to='/PokeCreate'>Haz tu Poke</Link> 
+    <Link to='/PokeCreate'>Haz tu Poke</Link> 
          
-       <Pagination
-          PokesForPage={PokesForPage}//Estado local
-          allPokemons={allPokemons.length}//useSelector-->state.Pokemons
-          pagination={pagination}
-
-          />
+    <Pagination
+        PokesForPage={PokesForPage}//Estado local
+        allPokemons={allPokemons.length}//useSelector-->state.Pokemons
+        pagination={pagination}
+    />
       
-      <h1>Hola pokemon!!!</h1>
-      <button onClick={event=>{handlerBack(event)}}>
-          Volver a cargar todos los pokemones
-      </button>
+    <h1>Hola pokemon!!!</h1>
+    <button onClick={event=>{handlerBack(event)}}>
+        Volver a cargar todos los pokemones
+    </button>
       
 
-      <div>     
-          <select defaultValue="title"  onChange={event=>handlerSort(event)}>
+    <div>     
+        <select defaultValue="title"  onChange={event=>handlerSort(event)}>
           <option value="title" selected={selected} disabled>
               Ordenar Alfabeticamente
-              </option>
-            <option value="asc">A-Z</option>// el value es el payload del reducer
-            <option value="desc">Z-A</option>
-          </select>
+          </option>
 
-     
+          <option value="asc">A-Z</option>// el value es el payload del reducer
+        
+          <option value="desc">Z-A</option>
+        </select>     
 
-    <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
-    <option value="title" selected={selected} disabled>
+        <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
+          <option value="title" selected={selected} disabled>
                     Filtrar por Tipo
-    </option>
-                  <option value="all">All</option>
-                  {allTypes?.map((t) => {
-                    return (
-                      <option value={t.name} key={t.id}>
-                        {t.name}
-                      </option>
-                    );
-                  })}
-     </select>
+          </option>
 
-
-          <select defaultValue="title" onChange={event=>handleFfilterCreated(event)} >
-              <option value="title" selected={selected} disabled>
-              Filtrar por origen
-              </option>
-              <option value="All">Todos</option>
-              <option value="Created">Creados</option>
-              <option value="Existentes">Existentes</option>
-          </select>
-
-          <select defaultValue="title" onChange={(e) => handlerAttack(e)}>
-                  <option value="title" selected={selected} disabled>
-                    Filtrar por Ataque
+          <option value="all">All</option>
+                  
+          {allTypes?.map((t) => {
+          return (
+                 <option value={t.name} key={t.id}>
+                     {t.name}
                   </option>
-                  <option value="Debil">Debil</option>
-                  <option value="Poderoso">Poderoso</option>
-                </select>
+                  );
+                  })}
+        </select>
+
+
+        <select defaultValue="title" onChange={event=>handleFfilterCreated(event)} >
+            <option value="title" selected={selected} disabled>
+              Filtrar por origen
+            </option>
+            <option value="All">Todos</option>
+            <option value="Created">Creados</option>
+            <option value="Existentes">Existentes</option>
+        </select>
+
+        <select defaultValue="title" onChange={(e) => handlerAttack(e)}>
+            <option value="title" selected={selected} disabled>
+                    Filtrar por Ataque
+            </option>
+            <option value="Debil">Debil</option>
+            <option value="Poderoso">Poderoso</option>
+        </select>
 
           
-          <SearchBar
+        <SearchBar
            setInput={setInput}
            setCurrentPage={setCurrentPage}
            setSelected={setSelected}
-          />
+        />          
 
-
-          {
-             currentPokes && currentPokes.map(poke=>{
-                 console.log(currentPokes)
-                  return(
-                      <>
-                        <Link to={`/pokeDetails/${poke.id}`}  target="_blank" >
-                        <Card
+        { 
+          charge? 
+            <div><Loading/></div>
+            :currentPokes && currentPokes.map(poke=>{
+                return(
+                    <>
+                      <Link to={`/pokeDetails/${poke.id}`}  target="_blank" >
+                      <Card
                             key={poke.id}
-                            name={poke.name} 
+                            name={poke.name.charAt(0).toUpperCase()+ poke.name.slice(1)} 
                             image={poke.img} 
-                            type={ poke.itsCreated ? poke.types.map(t=>t.name+' '): poke.type }
+                            type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.type }
                                                     
-                          />
-                        </Link>                       
-                     </>
-                  )
-              })
+                      />
+                      </Link>                       
+                    </>
+                 )
+            })
           }
          
       </div>
+     
     </div>
+    
   )
 }
 

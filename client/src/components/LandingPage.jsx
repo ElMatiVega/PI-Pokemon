@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import styles from "../components/styles/landingPage.module.css";
 import pokeBall from '../components/Img&Gif/pokeball.png';
@@ -13,16 +13,26 @@ import github from "../components/Img&Gif/Icon_github.png";
 const LandingPage = () => {
 
 
-  
+// const[loading, setLoading]=useState(' ')
+
+// useEffect(()=>{
+//   const image=setTimeout(()=>logo, 3000)
+//   setLoading(image)
+//   return()=>clearTineout(image)
+// },[])
+ 
+
+
   return (
     <div className={styles.BG}>
       <div className={styles.logoContainer}>
         <img className={styles.logoLanding} src={logo} alt="Pokeimage not found" />
-      </div>
-      <Link className={styles.Link} to={'/home'}>
+        <Link className={styles.Link} to={'/home'}>
         <img  className={styles.pokeBola} src={pokeBall} />
-       </Link>
-       <img className={styles.hand} src={gif} alt='gif'/> 
+        </Link>
+        <img className={styles.hand} src={gif} alt='gif'/> 
+      </div>
+ 
       
       <div className={styles.personalInfo}>
         <h2 className={styles.byMV}>Matías Vega</h2>
