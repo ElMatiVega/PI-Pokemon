@@ -13,7 +13,7 @@ const initialState={
 
 function rootReducer(state= initialState, action){
     switch(action.type){
-        case 'ESPERANDO':
+        case 'WAITING':
           return{
             ...state,
             loading:true
@@ -119,17 +119,22 @@ function rootReducer(state= initialState, action){
           }
 
         case 'FILTER_BY_TYPE':
-                const allPokemons = state.pokemons
+                const allPokemons = state.allPokemons
                 const filterType= action.payload === 'all'? allPokemons
                 : allPokemons.filter((p) =>
                 { 
-                 if(typeof(p.types)==='string') return p.types.map(t=>t).includes(action.payload);
+                  
+                 if(Array.isArray(p.type))  {
+                   let tipologia1=p.type.map((t)=>t)
+                  return tipologia1.includes(action.payload.charAt(0).toUpperCase()+  action.payload.slice(1)+' ');
+                 }
 
-                // if(Array.isArray(p.types)) {
-                //  let tipologia= p.types.map((t) => t.name)
-                //  return tipologia.includes(action.payload)}
+                if(Array.isArray(p.types)) {
+                 let tipologia= p.types.map((t) => t.name)
+                  return tipologia.includes(action.payload)}
                   return true
-              })
+              }
+              )
                 return{
                      ...state,
                      pokemons: filterType

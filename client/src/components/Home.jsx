@@ -13,7 +13,7 @@ function Home() {
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
     const Load= useSelector((state)=>state.loading)
     const allTypes= useSelector((state)=>state.types)
-    // const [charge, setCharge] = useState(false)
+    
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
     const [PokesForPage]= useState(12);//es el número de pokes por pagina
@@ -159,7 +159,7 @@ return (
                             key={poke.id}
                             name={poke.name.charAt(0).toUpperCase()+ poke.name.slice(1)} 
                             image={poke.img} 
-                            type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.types }
+                            type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.type }
                                                     
                       />
                       </Link>                       

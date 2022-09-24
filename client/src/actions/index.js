@@ -5,7 +5,7 @@ export function getPokemons(){
     
     return async function(dispatch){
         dispatch({
-            type:"ESPERANDO",
+            type:"WAITING",
         })
         var json = await axios.get("http://localhost:3001/pokemons");//aca conecto con el Back
         return dispatch({

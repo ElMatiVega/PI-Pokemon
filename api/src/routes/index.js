@@ -29,7 +29,7 @@ const getApiInfo = async () => {
         p.speed = url.data.stats[5].base_stat;
         p.height = url.data.height;
         p.weight = url.data.weight;
-        p.types =url.data.types.map((el) => el.type.name.charAt(0).toUpperCase()+  el.type.name.slice(1)+' ');
+        p.type =url.data.types.map((el) => el.type.name.charAt(0).toUpperCase()+  el.type.name.slice(1)+' ');
       }
       //console.log(allPokemons)
       return allPokemons;
@@ -42,13 +42,13 @@ const getApiInfo = async () => {
     
      const pokemons= await  Pokemon.findAll({
         include:Type,
-        // include:{
-        //     model:Type,
-        //     attributes:['name'],
-        //     through:{
-        //         attributes:[],
-        //     }
-        // }
+        include:{
+            model:Type,
+            attributes:['name'],
+            through:{
+                attributes:[],
+            }
+        }
       })
      return pokemons
   }
