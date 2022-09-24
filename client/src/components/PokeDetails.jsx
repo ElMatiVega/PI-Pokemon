@@ -9,7 +9,7 @@ function PokeDetails(props) {
     console.log(props)
     const id=props.match.params.id;
     const dispatch=useDispatch();
-
+   
     useEffect(()=>{
         dispatch(getDetail(id))
     },[dispatch])
@@ -23,7 +23,7 @@ function PokeDetails(props) {
       detailPoke.length>0 ?
       <div>
         <h1>Soy {detailPoke[0].name}</h1>
-        <img src={detailPoke[0].img} alt='pokeImg' width='300px' heigth='300px'/>
+        <img src={detailPoke[0].img2} alt='pokeImg' width='300px' heigth='300px'/>
         <h3>Tipos {detailPoke[0].itsCreated ? detailPoke[0].types.map(t=>t.name+' '): detailPoke[0].type }</h3>
         <p>Altura: {detailPoke[0].height}</p>
         <p>Ataque: {detailPoke[0].attack}</p>

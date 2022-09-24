@@ -11,8 +11,9 @@ import Loading from './Loading';
 function Home() {
     const dispatch= useDispatch();
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
+    const Load= useSelector((state)=>state.loading)
     const allTypes= useSelector((state)=>state.types)
-    const [charge, setCharge] = useState(false)
+    // const [charge, setCharge] = useState(false)
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
     const [PokesForPage]= useState(12);//es el número de pokes por pagina
@@ -26,8 +27,6 @@ function Home() {
 
 
 useEffect(()=>{
-      setCharge(true);
-      setTimeout(()=>{setCharge(false)}, 30000);
       dispatch(getPokemons());
       dispatch(getTypes());
     },[dispatch]);
@@ -43,52 +42,41 @@ const [order, setOrder]= useState('')
  //Ordenar ALFABETICAMENTE
 function handlerSort(e){
     e.preventDefault();
-    setCharge(true)
     dispatch(orderAlfhabetic(e.target.value))
     setCurrentPage(1);
     setOrder(`Ordenado ${e.target.value}`)
-    setTimeout(()=>{setCharge(false)}, 1000)
+   
   }
 
 //order Attack
 
 function handlerAttack(e){
   e.preventDefault();
-  setCharge(true)
   dispatch(orderAttack(e.target.value))
   setOrder(`Ordenado ${e.target.value}`)
   setCurrentPage(1);
   setInput(1);
-  setTimeout(()=>{setCharge(false)}, 1000)
+
 }
 
-    // useEffect(()=>{
-    //   setCharge(true)
-    //   setTimeout(()=>{setCharge(false)}, 40000)
-    //     dispatch(getPokemons())
-    //     dispatch(getTypes());
-    // },[dispatch])
 
     function handlerBack (e){
         e.preventDefault();
-        setCharge(true)
         dispatch(getPokemons());
-        setTimeout(()=>{setCharge(false)}, 1000)
+       
     }
 
     const handleTypeOptions = (e) => {
         e.preventDefault(e);
-        setCharge(true)
-        dispatch(getTypes(e.target.value));
+        dispatch(filterByType(e.target.value));
         setInput(1);
         setCurrentPage(1);
-        setTimeout(()=>{setCharge(false)}, 1000)
+       
       };
 
     function handleFfilterCreated(e){
-      setCharge(true)
       dispatch (filterCreated(e.target.value)) 
-      setTimeout(()=>{setCharge(false)}, 1000)
+     
     }
     
 return (
@@ -161,7 +149,7 @@ return (
         />          
 
         { 
-          charge? 
+          Load? 
             <div><Loading/></div>
             :currentPokes && currentPokes.map(poke=>{
                 return(
@@ -171,7 +159,7 @@ return (
                             key={poke.id}
                             name={poke.name.charAt(0).toUpperCase()+ poke.name.slice(1)} 
                             image={poke.img} 
-                            type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.type }
+                            type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.types }
                                                     
                       />
                       </Link>                       
@@ -189,29 +177,4 @@ return (
 
 
 export default Home;
-     {/* Filter TYPES */}
-      {/* <select onChange={event=>handlerFilterTypes(event)}> */}
-          {/* <select >
-              <option value="normal">normal</option>
-              <option value="flying">flying</option>
-              <option value="fighting">fighting</option>
-              <option value="poison">poison</option>
-              <option value="ground">ground</option>
-              <option value="bug">bug</option>
-              <option value="ghost">ghost</option>
-              <option value="steel">steel</option>
-              <option value="rock">rock</option>
-              <option value="fire">fire</option>
-              <option value="water">water</option>
-              <option value="grass">grass</option>
-              <option value="electric">electric</option>
-              <option value="psychic">psychic</option>
-              <option value="ice">ice</option>
-              <option value="dragon">dragon</option>
-              <option value="dark">dark</option>
-              <option value="fairy">fairy</option>
-              <option value="unknown">unknown</option>
-              <option value="shadow">shadow</option>
-          </select> */}
-
-
+    

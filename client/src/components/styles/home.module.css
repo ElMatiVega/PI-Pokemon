@@ -1,0 +1,10 @@
+.container{  
+    background: linear-gradient(to right,  #f6fa09,#03256e);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-position: center center;}

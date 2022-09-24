@@ -5,54 +5,32 @@ const initialState={
     pokemons:[],
     allPokemons:[],
     types: [],
-    pokemonsByType: [],
-    pokemonsByOrigin: [],
     error: null,
-    pokeDetail:[]
-   
+    pokeDetail:[],
+    loading:true
   
 }
 
 function rootReducer(state= initialState, action){
     switch(action.type){
+        case 'ESPERANDO':
+          return{
+            ...state,
+            loading:true
+          }
         case 'GET_POKEMONS'://traigo la accion que trae a los pokemones
         return{
             ...state,
             pokemons: action.payload, 
             allPokemons:action.payload, 
-            pokemonsByOrigin: action.payload,
-            pokemonsByType: action.payload,
             error: null,
+            loading:false
 
         }
 
 
         case 'GET_TYPE':
         return { ...state, types: action.payload };
-
-
-        case'FILTER_BY_TYPE':
-        const allPokemons = state.allPokemons;
-        const filteredByType =
-        action.payload === "all"
-          ? allPokemons
-          : allPokemons?.filter((p) =>
-              p.types.map((t) => t.name).includes(action.payload)
-            );
-        const commonPokes1 =
-        state.pokemonsByOrigin.length > 0
-          ? filteredByType.filter((p) => state.pokemonsByOrigin.includes(p))
-          : filteredByType;
-        return {
-        ...state,
-        pokemonsByType: filteredByType,
-        pokemons: commonPokes1,
-        error:
-          commonPokes1.length === 0
-            ? { message: "pokemon no creado" }
-            : null,
-      };
-
 
 
         case "FILTER_CREATED":
@@ -140,15 +118,22 @@ function rootReducer(state= initialState, action){
             pokeDetail:action.payload 
           }
 
-        // case 'FILTER_BY_TYPE':
-        //         const allPokemons = state.pokemons
-        //         const filterType= action.payload === 'all'? allPokemons : allPokemons.filter((p) =>
-        //         p.types.map((t) => t.name).includes(action.payload)
-        //       );
-        //         return{
-        //              ...state,
-        //              pokemons: filterType
-        //         }
+        case 'FILTER_BY_TYPE':
+                const allPokemons = state.pokemons
+                const filterType= action.payload === 'all'? allPokemons
+                : allPokemons.filter((p) =>
+                { 
+                 if(typeof(p.types)==='string') return p.types.map(t=>t).includes(action.payload);
+
+                // if(Array.isArray(p.types)) {
+                //  let tipologia= p.types.map((t) => t.name)
+                //  return tipologia.includes(action.payload)}
+                  return true
+              })
+                return{
+                     ...state,
+                     pokemons: filterType
+                }
 
         default:
             return{...state}
