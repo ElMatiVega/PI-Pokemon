@@ -1,10 +1,114 @@
-.container{  
-    background: linear-gradient(to right,  #f6fa09,#03256e);
+.Link{
+    text-decoration: none;
+}
+body{  
+    background: linear-gradient(to right,  #f7fa42,#044ae2);
     background-repeat: no-repeat;
-    background-size: auto 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-position: center center;}
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.bigBox {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1%;
+  }
+
+.Render{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+}
+
+.pagination {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.logo {
+    width: 35em;
+    margin-left: 5%;
+}
+
+
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    margin-right: 2%;
+  }
+.menu {
+    background: none;
+    justify-content: space-between;
+}
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+.menu ul li {
+    display: inline-block;
+}
+  
+.menu ul li .buttons {
+    color: #0d0d0d;
+    display: block;
+    padding: 15px 45px;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    width: fit-content;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+  
+.menu ul li .buttons:hover {
+    background-color: #fdeaaf;
+    border-radius: 10px;
+}
+
+.filtered {
+    background: none;
+  }
+  
+  .filtered ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .filtered ul li {
+    display: inline-block;
+    padding: 0px 29px;
+  }
+  
+  .filtered ul li select {
+    color: #0d0d0d;
+    display: block;
+    padding: 8px;
+    width: auto;
+  }
+  
+  .filtered ul li select:hover {
+    background-color: #fceec4;
+    cursor: pointer;
+  }

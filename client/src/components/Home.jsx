@@ -6,7 +6,9 @@ import Card from './Card';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar';
 import Loading from './Loading';
-
+import style from './styles/home.module.css';
+import logo from '../components/Img&Gif/Logo.png';
+import PikaHass from '../components/Img&Gif/PikaHass.png';
 
 function Home() {
     const dispatch= useDispatch();
@@ -80,91 +82,111 @@ function handlerAttack(e){
     }
     
 return (
-  <div>
+  <div className={style.home}>
+    <div>
+      <img className={style.logo} src={logo} alt="Pokeimage not found" />
+      <img className={style.logo} src={PikaHass} alt="Pokeimage not found" />
+    </div>
       
-    <Link to='/PokeCreate'>Haz tu Poke</Link> 
-         
-    <Pagination
-        PokesForPage={PokesForPage}//Estado local
-        allPokemons={allPokemons.length}//useSelector-->state.Pokemons
-        pagination={pagination}
-    />
-      
-    <h1>Hola pokemon!!!</h1>
-    <button onClick={event=>{handlerBack(event)}}>
-        Volver a cargar todos los pokemones
-    </button>
-      
+      <div className={style.bigBox}>
+        <div className={style.container}>
+          <div className={style.menu}>
+            <ul>
+              <li>
+                <Link to='/PokeCreate'className={style.Link}>Haz tu Poke</Link>
+              </li>
+               
+              <li>
+                <button className={style.buttons} onClick={event=>{handlerBack(event)}}>
+                  Volver a cargar todos los pokemones
+                </button>
+              </li>
+              
+              <li>
+                <SearchBar
+                setInput={setInput}
+                setCurrentPage={setCurrentPage}
+                setSelected={setSelected}
+                />
+              </li>
+            </ul>
+          </div>
+          
+          
+          <div className={style.filtered}>
+              <select defaultValue="title"  onChange={event=>handlerSort(event)}>
+                <option value="title" selected={selected} disabled>
+                Ordenar Alfabeticamente
+               </option>
 
-    <div>     
-        <select defaultValue="title"  onChange={event=>handlerSort(event)}>
-          <option value="title" selected={selected} disabled>
-              Ordenar Alfabeticamente
-          </option>
-
-          <option value="asc">A-Z</option>// el value es el payload del reducer
+               <option value="asc">A-Z</option>// el value es el payload del reducer
         
-          <option value="desc">Z-A</option>
-        </select>     
+              <option value="desc">Z-A</option>
+           </select>     
 
-        <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
-          <option value="title" selected={selected} disabled>
-                    Filtrar por Tipo
-          </option>
-
-          <option value="all">All</option>
-                  
-          {allTypes?.map((t) => {
-          return (
-                 <option value={t.name} key={t.id}>
-                     {t.name}
-                  </option>
-                  );
-                  })}
-        </select>
-
-
-        <select defaultValue="title" onChange={event=>handleFfilterCreated(event)} >
-            <option value="title" selected={selected} disabled>
+            <select defaultValue="title" onChange={event=>handleFfilterCreated  (event)} >
+              <option value="title" selected={selected} disabled>
               Filtrar por origen
-            </option>
-            <option value="All">Todos</option>
-            <option value="Created">Creados</option>
-            <option value="Existentes">Existentes</option>
-        </select>
+              </option>
+              <option value="All">Todos</option>
+              <option value="Created">Creados</option>
+              <option value="Existentes">Existentes</option>
+            </select>
 
-        <select defaultValue="title" onChange={(e) => handlerAttack(e)}>
+           <select defaultValue="title" onChange={(e) => handlerAttack(e)}>
             <option value="title" selected={selected} disabled>
                     Filtrar por Ataque
             </option>
             <option value="Debil">Debil</option>
             <option value="Poderoso">Poderoso</option>
-        </select>
+            </select>
 
-          
-        <SearchBar
-           setInput={setInput}
-           setCurrentPage={setCurrentPage}
-           setSelected={setSelected}
-        />          
+            <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
+              <option value="title" selected={selected} disabled>
+                    Filtrar por Tipo
+              </option>
 
-        { 
+              <option value="all">All</option>
+                  
+              {allTypes?.map((t) => {
+              return (
+                 <option value={t.name} key={t.id}>
+                     {t.name}
+                  </option>
+                  );
+                  })}
+            </select>
+          </div>
+        </div>
+
+       
+      </div>
+
+      <div className={style.pagination}>
+        <Pagination
+          PokesForPage={PokesForPage}//Estado local
+          allPokemons={allPokemons.length}//useSelector-->state.Pokemons
+          pagination={pagination}
+        />
+      </div>
+      
+      <div className={style.Render}>     
+         { 
           Load? 
             <div><Loading/></div>
             :currentPokes && currentPokes.map(poke=>{
-                return(
-                    <>
-                      <Link to={`/pokeDetails/${poke.id}`}  target="_blank" >
-                      <Card
-                            key={poke.id}
-                            name={poke.name.charAt(0).toUpperCase()+ poke.name.slice(1)} 
-                            image={poke.img} 
-                            type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.type }
+              return(
+                <>               
+                <Card
+                    key={poke.id}
+                    id={poke.id}
+                    name={poke.name.charAt(0).toUpperCase()+ poke.name.slice(1)} 
+                    image={poke.img} 
+                    type={ poke.itsCreated ? poke.types.map(t=>' '+t.name.charAt(0).toUpperCase()+ t.name.slice(1)+' '): poke.type }
                                                     
-                      />
-                      </Link>                       
-                    </>
-                 )
+                />
+                </>
+              )
             })
           }
          
