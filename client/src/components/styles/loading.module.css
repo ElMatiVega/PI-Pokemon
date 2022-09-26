@@ -41,6 +41,7 @@
   .image{
     width: 17em;
     height: 15em;
+    border: solid 3px tomato;
   }
 
   @media screen and (max-width: 500px) {

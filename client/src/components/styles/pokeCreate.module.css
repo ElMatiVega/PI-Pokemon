@@ -1,0 +1,121 @@
+
+.CreateCointainer{
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.CreateCointainer::after {
+    content: "";
+    background: url("../Img&Gif/PikaHass.png") #f7d676;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+  }
+h1 {
+    width: 900px;
+    background-color: rgba(255, 238, 0, 0.726);
+    text-align: center;
+    border-radius: 15px 15px 0px 0px;
+    margin: auto;
+    margin-top: 30px;
+    color: #044ae2;
+    padding: 10px, 0px, 10px, 0px;
+  }
+
+  .Main {
+    background-color: rgba(255, 238, 0, 0.39);
+    width: 900px;
+    height: 550px;
+    margin: auto;
+    border-radius: 0px 0px 15px 15px;
+  }
+  form {
+    padding-top: 5px;
+    text-align: center;
+  }
+ li{
+     color: #0c5801;
+ }
+  .Left {
+    padding: 30px;
+    margin-left: 20px;
+    position: fixed;
+  }
+  
+  .Right {
+    padding: 30px;
+    margin-right: 50px;
+    position: fixed;
+    margin-left: 500px;
+  }
+  label {
+    color: #044ae2;
+    font-family: cursive;
+    letter-spacing: 1px;
+    font-size: 16px;
+    float: left;
+    margin-left: 5%;
+  }
+  .inputCreate {
+    flex-grow: 1;
+    padding: 5px;
+    outline: none;
+    border: 1px solid rgba(255, 238, 0, 0.726);
+    border-radius: 5px;
+    background: #f3d8d5;
+    transition: background 0.25s, box-shadow 0.25s;
+    width: 100%;
+    max-width: 300px;
+    display: inline-flex;
+    font-family: cursive;
+  }
+  .inputCreate:focus {
+    background: rgba(37, 219, 37, 0.562);
+    box-shadow: 0 0 2px #0c5801;
+  }
+  
+  .inputCreate::placeholder {
+    color: tomato;
+    opacity: 0.5;
+  }
+  .tipo{
+    color: #044ae2;
+    font-family: cursive;
+    letter-spacing: 1px;
+    font-size: 16px;
+    float: left;
+    margin-left: 5%;
+}
+.tipoSelect:focus {
+    background: rgba(37, 219, 37, 0.562);
+    box-shadow: 0 0 2px #0c5801;
+  }
+
+  select {
+    flex-grow: 1;
+    padding: 5px;
+    outline: none;
+    border: 1px rgba(255, 238, 0, 0.726);
+    border-radius: 5px;
+    background: #f3d8d5;
+    transition: background 0.25s, box-shadow 0.25s;
+    width: 100%;
+    max-width: 300px;
+    display: inline-flex;
+    font-family: cursive;
+    color: #0d0d0d;
+  }
+ .error{
+    color: #f22613;
+    font-family: cursive;
+    font-size: 14px;
+    text-align: left;
+    position: fixed;
+ }

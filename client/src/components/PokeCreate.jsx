@@ -3,6 +3,7 @@ import {Link, useHistory} from 'react-router-dom'
 import  {useState, useEffect} from 'react';
 import{postPokemon, getTypes} from '../actions/index';
 import{ useDispatch, useSelector} from 'react-redux';
+import style from './styles/pokeCreate.module.css';
 
 
 function validateForm(input){
@@ -89,14 +90,17 @@ function PokeCreate() {
   }
 
 function handleSubmit(e){
-if( 
-    errors.image === '' ||
-    errors.name === ''  ||
-    errors.height_min === ''|| 
-    errors.height_max === '' ||
-    errors.weight_min === '' ||
-    errors.weight_max === '' ||
-    errors.life_span === '')
+  if (
+    input.img &&
+    input.name  &&
+    input.attack &&
+    input.defense &&
+    input.speed &&
+    input.height &&
+    input.weight &&
+    input.hp &&
+    input.types.length >0 && input.types.length <3
+)
  { e.preventDefault();
   dispatch(postPokemon(input));
   alert("Pokemon creado");
@@ -120,112 +124,164 @@ if(
   
 
   return (
-    <div>
-    <Link to='/home'>Volver</Link><br />
-     <h1>Crea tu Pokemon</h1> 
-     <form onSubmit={handleSubmit}>
-       <div>
-         <label>Nombre:</label>
-         <input 
-          type='text'
-          value={input.name} 
-          name='name'
-          placeholder="Nombre de tu Pokemon"
-          onChange={handleChange}
-          />
-          {errors.name && <p className='error'>{errors.name}</p>}
+    <div className={style.CreateCointainer}>
+      <h1>Crea tu Pokemon</h1>
+      <div className={style.Main}>
+        <form onSubmit={handleSubmit}>
+          <div className={style.Left}>
+            <div>
+              <label>Nombre:</label>
+              <input 
+                className={style.inputCreate}
+               type='text'
+                value={input.name} 
+                name='name'
+                placeholder="Nombre de tu Pokemon"
+                onChange={handleChange}
+              />
+             {errors.name && <p className={style.error}>{errors.name}</p>}
+            </div>
+            <br />
+            <div>
+              <label>Imagen:</label>
+              <input 
+                    className={style.inputCreate}
+                    type="url" 
+                    value={input.img}
+                    name='img'
+                    placeholder="URL de la imagen"
+                    onChange={handleChange}
+              />
+              {errors.img && <p className={style.error}>{errors.img}</p>}
+            </div>
+            <br />
+            <div>
+              <lebel className={style.tipo}>Tipo:{" "}</lebel>
+              <select className={style.tipoSelect} onChange={handleSelect}>
+                { pokesTypes.map((t)=>(
+                  <option value={t.name} key={t.id}>{t.name}</option>
+                  ))
+                } 
+              </select>
+             
+               
+                {input.types.map(elem=> <div>
+                    
+                   <button onClick={()=>handleDelete(elem)}>{elem} </button>
+                 </div>)}
+               
+                
+{/*                
+                {input.types.map(elem=>
+                  <div>
+                    <p>{elem}</p>
+                   <button onClick={()=>handleDelete(elem)}>delete</button>
+                 </div>
+          )
+        } */}
+            </div>
+          </div>
+          
+          <div className={style.Right}>
+            <div>
+              <label>Vida:</label>
+              <input 
+                className={style.inputCreate}
+                min='0'
+                max='200'
+                type="number" 
+                value={input.hp}
+                name='hp'
+                placeholder="vida de tu Pokemon"
+                onChange={handleChange}
+              />
+             {errors.hp && <p className={style.error}>{errors.hp}</p>}
+            </div>
+            <br />
+            <div>
+              <label>Ataque:</label>
+              <input 
+                className={style.inputCreate}
+                min='10'
+                max='150'
+                type="number" 
+                value={input.attack} 
+                name='attack'
+                placeholder="Nivel de Ataque de tu Pokemon"
+                onChange={handleChange}/>
+              {errors.attack && <p className={style.error}>{errors.attack}</p>}
+            </div>
+            <br />
+            <div>
+              <label>Defensa:</label>
+              <input 
+                className={style.inputCreate}
+                min='10'
+                max='150'
+                type="number"
+                value={input.defense}
+                name='defense'
+                placeholder="Nivel de defensa de tu Pokemon"
+                onChange={handleChange}/>
+              {errors.defense && <p className={style.error}>{errors.defense}</p>}
+            </div>
+            <br />
+            <div>
+              <label>Velocidad:</label>
+              <input 
+                className={style.inputCreate}
+                min='5'
+                max='150'
+                type="number" 
+                value={input.speed} 
+                name='speed'
+                placeholder="Velocidad de tu Pokemon"
+                onChange={handleChange}/>
+              {errors.speed && <p className={style.error}>{errors.speed}</p>}
+            </div>
+            <br />
+            <div>
+              <label>Altura:</label>
+              <input 
+                className={style.inputCreate}
+                min='5'
+                max='200'
+                type="number" 
+                value={input.height}
+                name='height'
+                placeholder="Altura de tu Pokemon"
+                onChange={handleChange}/>
+                {errors.height && <p className={style.error}>{errors.height}</p>}
+            </div>
+            <div>
+              <label>Peso:</label>
+              <input
+                 className={style.inputCreate}
+                 min='5'
+                 max='200'
+                type="number" 
+                value={input.weight} 
+                name='weight'
+                placeholder="Peso de tu Pokemon"
+                onChange={handleChange}/>
+              {errors.weight && <p className={style.error}>{errors.weight}</p>}
+            </div>
+       
        </div>
-        <div>
-         <label>Vida:</label>
-         <input 
-          type="number" 
-          value={input.hp}
-          name='hp'
-          placeholder="vida de tu Pokemon"
-          onChange={handleChange}/>
-          {errors.hp && <p className='error'>{errors.hp}</p>}
-       </div>
-      <div>
-         <label>Ataque:</label>
-         <input 
-         type="number" 
-         value={input.attack} 
-         name='attack'
-         placeholder="Nivel de Ataque de tu Pokemon"
-         onChange={handleChange}/>
-         {errors.attack && <p className='error'>{errors.attack}</p>}
-       </div>
-       <div>
-         <label>Defensa:</label>
-         <input 
-           type="number"
-           value={input.defense}
-           name='defense'
-           placeholder="Nivel de defensa de tu Pokemon"
-           onChange={handleChange}/>
-           {errors.defense && <p className='error'>{errors.defense}</p>}
-       </div>
-       <div>
-         <label>Velocidad:</label>
-         <input 
-         type="number" 
-         value={input.speed} 
-         name='speed'
-         placeholder="Velocidad de tu Pokemon"
-         onChange={handleChange}/>
-         {errors.speed && <p className='error'>{errors.speed}</p>}
-       </div>
-       <div>
-         <label>Altura:</label>
-         <input 
-          type="number" 
-          value={input.height}
-          name='height'
-          placeholder="Altura de tu Pokemon"
-          onChange={handleChange}/>
-          {errors.height && <p className='error'>{errors.height}</p>}
-       </div>
-       <div>
-         <label>Peso:</label>
-         <input
-          type="number" 
-          value={input.weight} 
-          name='weight'
-          placeholder="Peso de tu Pokemon"
-          onChange={handleChange}/>
-          {errors.weight && <p className='error'>{errors.weight}</p>}
-       </div>
-       <div>
-         <label>Imagen:</label>
-         <input type="url" 
-          value={input.img}
-          name='img'
-          placeholder="URL de la imagen"
-          onChange={handleChange}/>
-          {errors.img && <p className='error'>{errors.img}</p>}
-       </div>
+     
       
-       <div>
-        <lebel>Tipo:{" "}</lebel>
-          <select onChange={handleSelect}>
-            { pokesTypes.map((t)=>(
-            <option value={t.name} key={t.id}>{t.name}</option>
-            ))} 
-          </select>
-          <ul>
-            <li>
-              {input.types.map(elem=>elem +" ")}
-            </li>
-          </ul>
-          <button >Crear</button>
-       </div>
+       
+       <button >Crear</button>
+        
      </form>
-    {input.types.map(elem=>
-    <div>
-      <p>{elem}</p>
-      <button onClick={()=>handleDelete(elem)}>delete</button>
     </div>
-    )}
+     
+   
+
+
+    <div>
+      <Link to='/home'>Volver</Link><br />
+    </div>
    
     </div>
   )

@@ -82,6 +82,7 @@ function handlerAttack(e){
     }
     
 return (
+
   <div className={style.home}>
     <div>
       <img className={style.logo} src={logo} alt="Pokeimage not found" />
@@ -114,52 +115,53 @@ return (
           
           
           <div className={style.filtered}>
-              <select defaultValue="title"  onChange={event=>handlerSort(event)}>
-                <option value="title" selected={selected} disabled>
-                Ordenar Alfabeticamente
-               </option>
-
-               <option value="asc">A-Z</option>// el value es el payload del reducer
-        
-              <option value="desc">Z-A</option>
-           </select>     
-
-            <select defaultValue="title" onChange={event=>handleFfilterCreated  (event)} >
-              <option value="title" selected={selected} disabled>
-              Filtrar por origen
-              </option>
-              <option value="All">Todos</option>
-              <option value="Created">Creados</option>
-              <option value="Existentes">Existentes</option>
-            </select>
-
-           <select defaultValue="title" onChange={(e) => handlerAttack(e)}>
-            <option value="title" selected={selected} disabled>
-                    Filtrar por Ataque
-            </option>
-            <option value="Debil">Debil</option>
-            <option value="Poderoso">Poderoso</option>
-            </select>
-
-            <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
-              <option value="title" selected={selected} disabled>
-                    Filtrar por Tipo
-              </option>
-
-              <option value="all">All</option>
-                  
-              {allTypes?.map((t) => {
-              return (
-                 <option value={t.name} key={t.id}>
-                     {t.name}
+            <ul>
+              <li>
+                <select defaultValue="title"  onChange={event=>handlerSort(event)}>
+                  <option value="title" selected={selected} disabled>
+                   Ordenar Alfabeticamente
                   </option>
-                  );
+                  <option value="asc">A-Z</option>// el value es el payload del reducer
+                  <option value="desc">Z-A</option>
+                </select> 
+              </li>
+              <li>
+                <select defaultValue="title" onChange={event=>handleFfilterCreated  (event)} >
+                  <option value="title" selected={selected} disabled>
+                     Filtrar por origen
+                  </option>
+                  <option value="All">Todos</option>
+                  <option value="Created">Creados</option>
+                  <option value="Existentes">Existentes</option>
+                </select>
+              </li>
+              <li>
+                <select defaultValue="title" onChange={(e) => handlerAttack(e)}>
+                  <option value="title" selected={selected} disabled>
+                    Filtrar por Ataque
+                  </option>
+                  <option value="Debil">Debil</option>
+                  <option value="Poderoso">Poderoso</option>
+                </select>
+              </li>
+              <li>
+                <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
+                  <option value="title" selected={selected} disabled>
+                    Filtrar por Tipo
+                  </option>
+                  <option value="all">All</option>
+                  {allTypes?.map((t) => {
+                    return (
+                      <option value={t.name} key={t.id}>
+                        {t.name}
+                      </option>
+                    );
                   })}
-            </select>
+                </select>
+              </li>
+            </ul>
           </div>
         </div>
-
-       
       </div>
 
       <div className={style.pagination}>

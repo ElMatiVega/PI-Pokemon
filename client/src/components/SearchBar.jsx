@@ -3,8 +3,8 @@ import { useState } from "react";
 import{useDispatch} from 'react-redux';
 import {getNamePokemons} from '../actions/index';
 
-//import "./styles/SearchBar.css";
-import SearchIcon from "./Img&Gif/Pika.png";
+import style from './styles/searchBar.module.css';
+import PikaBusca from "./Img&Gif/Pika.png";
 
 const SearchBar = ({ setInput, setCurrentPage, setSelected }) => {
   const dispatch = useDispatch();
@@ -41,9 +41,9 @@ const SearchBar = ({ setInput, setCurrentPage, setSelected }) => {
 
   return (
     <div>
-      <div className="searchBar">
+      <div className={style.searchBar}>
         <input
-          className="searchBar-input"
+          className={style.input}
           required
           type="text"
           placeholder="Buscar..."
@@ -52,11 +52,11 @@ const SearchBar = ({ setInput, setCurrentPage, setSelected }) => {
           onChange={(e) => handleInput(e)}
         />
         <button
-          className="searchBar-button"
+          className={style.button}
           type="submit"
           onClick={(e) => handleClick(e)}
         >
-          <img src={SearchIcon} width='35px'  height='35px' alt="not found"  />
+          <img src={PikaBusca} className={style.img} alt="not found"  />
         </button>
       </div>
     </div>
