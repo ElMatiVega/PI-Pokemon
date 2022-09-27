@@ -39,6 +39,10 @@
     max-height: 100%;
     border-radius: 15px;
   }
+  .container .card .img img:hover{
+    transform: scale(1.2) ;
+    transition: 1s;
+  }
 
   .container .card .content {
     position: relative;

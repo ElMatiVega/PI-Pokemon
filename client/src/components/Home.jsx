@@ -9,12 +9,13 @@ import Loading from './Loading';
 import style from './styles/home.module.css';
 import logo from '../components/Img&Gif/Logo.png';
 import PikaHass from '../components/Img&Gif/PikaHass.png';
-
+import BtnHaz from './btnHaz'
 function Home() {
     const dispatch= useDispatch();
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
     const Load= useSelector((state)=>state.loading)
     const allTypes= useSelector((state)=>state.types)
+   // const error= useSelector((state)=>state.error)
     
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
@@ -94,7 +95,7 @@ return (
           <div className={style.menu}>
             <ul>
               <li>
-                <Link to='/PokeCreate'className={style.Link}>Haz tu Poke</Link>
+               <BtnHaz />
               </li>
                
               <li>
@@ -108,6 +109,7 @@ return (
                 setInput={setInput}
                 setCurrentPage={setCurrentPage}
                 setSelected={setSelected}
+                allPokemons={allPokemons}
                 />
               </li>
             </ul>

@@ -66,17 +66,21 @@ const getApiInfo = async () => {
   //get/pokemons y get/pokemonsQuery
 
   router.get('/pokemons', async (req,res)=>{
+    try {
       const name=req.query.name;
       let pokemonsTotal=await getAllPokemons();
       if(name){
           let ponkemonName= await pokemonsTotal.filter(elem=>elem.name.toLowerCase().includes(name.toLowerCase()));
           ponkemonName.length ?
-          res.status(200).send(ponkemonName):
-          res.status(404).send('No existe ese Pokemon')
+          res.status(200).send(ponkemonName): res.json([])          
       }else{
           res.status(200).send(pokemonsTotal)
       }
 
+    } catch (error) {
+      res.status(404).send({ error: error.message })
+    }
+     
   })
 
 

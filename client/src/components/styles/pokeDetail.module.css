@@ -1,0 +1,96 @@
+body{
+    background-image: url("../Img&Gif/paisaje.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+.BGDetail{
+    
+    
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    position: relative;
+    margin: 1em;
+    align-content: stretch;
+}
+.PokeDetails{
+    color: #044ae2;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+    font-weight: 700;
+    font-style: italic;
+    border: #fad56675 solid 4px;
+    background-color:rgba(40, 194, 241, 0.207);
+}
+.PokeDetails:hover{
+    color:black;
+    border: #f7d202 solid 4px; 
+    background-color: rgba(5, 98, 204, 0.603);
+    width:20em;
+    transition: .5s;
+}
+
+   
+ .botoncito{
+    background-color:transparent;
+    position: absolute;
+    right: 0;
+    border-color: tomato;
+    border-radius: 5rem ;
+    color: red;
+   
+}
+ .botoncito:hover{
+    background-color:red;
+    color:tomato;
+    font-weight:bold;
+    border-style:inset;
+}
+.imagencita{
+    position: relative;
+    width:15em; 
+   
+}
+.imagencita:hover{
+    width:20em;
+    transition: .5s;
+}
+
+ @media  (prefers-reduced-motion: no-preference) {
+    .imagencita {
+      animation: imagencita  4s infinite;
+    }
+  }
+  @keyframes imagencita {
+      0%, 100%{top:0;}
+      30%{top:25%}
+    
+  }
+
+  .temperaturitas{
+      position: absolute;
+      font-size: 1em;
+      font-weight:bold;
+      color:currentColor; 
+      margin: 25px;
+      padding: 25px;
+  }
+  .namecita{
+      font-weight: 800;
+      font-size: 2em;
+      padding:10px;
+      margin:10px;
+
+  }
+  @media  (max-width: 960px) {
+    .BGDetail{
+    backdrop-filter: blur(4px); 
+    margin: 1em;             
+    }
+  } 

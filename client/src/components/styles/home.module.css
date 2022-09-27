@@ -1,10 +1,10 @@
 
 body{  
-    background: linear-gradient(to right,  #f7d676,#044ae2);
+    background: linear-gradient(to right,  #f7d202,#044ae2);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    background-position: center center;
+    background-position: center;
 }
 .Link{
   text-decoration: none;
@@ -73,6 +73,7 @@ body{
   
 .menu ul li {
     display: inline-block;
+    background: none;
 }
   
 .menu ul li .buttons {
@@ -107,13 +108,16 @@ body{
   .filtered ul li {
     display: inline-block;
     padding: 0px 29px;
+    
   }
   
   .filtered ul li select {
     color: #0d0d0d;
+    font-size: larger;
     display: block;
     padding: 8px;
     width: auto;
+    background: none;
   }
   
   .filtered ul li select:hover {

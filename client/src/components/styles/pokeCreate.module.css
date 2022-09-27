@@ -18,7 +18,7 @@
     right: 0;
     z-index: -1;
   }
-h1 {
+.h1 {
     width: 900px;
     background-color: rgba(255, 238, 0, 0.726);
     text-align: center;
@@ -30,6 +30,7 @@ h1 {
   }
 
   .Main {
+    display: flex;
     background-color: rgba(255, 238, 0, 0.39);
     width: 900px;
     height: 550px;
@@ -53,7 +54,7 @@ h1 {
     padding: 30px;
     margin-right: 50px;
     position: fixed;
-    margin-left: 500px;
+    margin-left: 600px;
   }
   label {
     color: #044ae2;
@@ -97,6 +98,9 @@ h1 {
     background: rgba(37, 219, 37, 0.562);
     box-shadow: 0 0 2px #0c5801;
   }
+  .tipoOption:focus{
+    background: rgba(37, 219, 37, 0.562);
+  }
 
   select {
     flex-grow: 1;
@@ -119,3 +123,65 @@ h1 {
     text-align: left;
     position: fixed;
  }
+ button:hover{
+   color:#f22613;
+ }
+
+
+
+ @media screen and (max-width: 900px) {
+  
+  
+  .h1 {
+    
+    width: 700px;
+    font-size: 24px;
+  }
+  .Main {
+    width: 700px;
+  }
+  .inputCreate{
+    width: 9em;
+  }
+  .Left{
+    padding: 2px;
+    padding: 3px;
+    margin-right: 5px;
+    margin-right: 400px;
+  }
+  .Right {
+    padding: 2px;
+    padding: 3px;
+    margin-right: 5px;
+    margin-left: 400px;
+  
+  }  
+}
+
+ @media screen and (max-width: 550px) {
+  
+  
+  .h1 {
+    width: 400px;
+    font-size: 24px;
+  }
+  .Main {
+    width: 400px;
+  }
+  .Left {
+    padding: 2px;
+  }
+  .Right {
+    padding: 2px;
+    margin-left: 200px;
+    margin-right: .5em;
+  }  
+  .error {
+    font-size: 10px;
+  }
+ 
+  .inputCreate {
+    padding: 0;
+    margin: 0%;
+  }
+}

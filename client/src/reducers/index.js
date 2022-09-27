@@ -102,9 +102,22 @@ function rootReducer(state= initialState, action){
             }
 
         case "GET_NAME_POKEMONS"://para el searchBar
-          return{
-            ...state,
-            pokemons:action.payload
+          // return{
+          //   ...state,
+          //   pokemons:action.payload
+          // }
+          if (action.payload.length === 0) {
+            return {
+              ...state,
+              pokemons: action.payload,
+              error:  action.payload ,
+            };
+          } else {
+            return {
+              ...state,
+              pokemons: action.payload,
+              error: null,
+            };
           }
 
         case "POST_POKEMON":

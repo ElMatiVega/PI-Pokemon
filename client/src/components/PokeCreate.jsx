@@ -4,13 +4,20 @@ import  {useState, useEffect} from 'react';
 import{postPokemon, getTypes} from '../actions/index';
 import{ useDispatch, useSelector} from 'react-redux';
 import style from './styles/pokeCreate.module.css';
+import Btn1 from './btn1';
+import Btn2 from './btn2';
 
 
 function validateForm(input){
   let errors= {};
   if(!/((?=.)^[a-zA-Z\s]{1,19}[a-zA-Z]$)|((?!._)^[a-zA-Z\s]{1,20}$)/.test(input.name)){ 
     errors.name= 'Se requiere un nombre';
-  }else if(input.hp < 1 || input.hp > 200) { 
+  }else if(!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(input.img)) {
+    errors.img= 'Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg, Aviso: de no ser provista tendra una por defecto'
+
+}else if(input.types.length ===0 || input.types.length > 3) {
+  errors.Types= 'Selecciona hasta 3 tipos'
+}else if(input.hp < 1 || input.hp > 200) { 
     errors.hp = 'Vida requiere un valor entre 0 y 200'
 
 }else if(input.attack < 10 || input.attack > 150) {
@@ -22,18 +29,12 @@ function validateForm(input){
 }else if(input.speed < 5 || input.speed > 150) {
   errors.speed = 'Velocidad requiere un valor entre 5 y 150'
 
-}else if(input.height< 5 || input.height > 200) {
-  errors.height = 'Se requiere un valor entre 5 y 200'
+}else if(input.height < 5 || input.height > 200) {
+  errors.height = 'Altura requiere un valor entre 5 y 200'
 
-}else if(input.weight< 5 || input.weight > 200) {
-  errors.weight = 'Se requiere un valor entre 5 y 200'
-
-}else if(!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(input.img)) {
-      errors.img= 'Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg, Aviso: de no ser provista tendra una por defecto'
-
-  } else if(input.types.length ===0 || input.type.length > 3) {
-      errors.Types= 'Selecciona hasta 3 tipos'
-  }
+}else if(input.weight < 5 || input.weight > 200) {
+  errors.weight = 'Peso requiere un valor entre 5 y 200'
+} 
   return errors
 }
 
@@ -99,8 +100,7 @@ function handleSubmit(e){
     input.height &&
     input.weight &&
     input.hp &&
-    input.types.length >0 && input.types.length <3
-)
+    input.types.length >0 && input.types.length < 3)
  { e.preventDefault();
   dispatch(postPokemon(input));
   alert("Pokemon creado");
@@ -116,7 +116,7 @@ function handleSubmit(e){
     types:[],
   })
   history.push('/home')}else{
-    return alert("Volvé a empezar, no puedo dejarte un mensaje mas lindo porque Henry no me deja")
+    return alert("Lo siento, faltan campos por completar correctamente")
   }
 }
 
@@ -125,9 +125,9 @@ function handleSubmit(e){
 
   return (
     <div className={style.CreateCointainer}>
-      <h1>Crea tu Pokemon</h1>
+      <h1 className={style.h1} >Crea tu Pokemon</h1>
       <div className={style.Main}>
-        <form onSubmit={handleSubmit}>
+        <form >
           <div className={style.Left}>
             <div>
               <label>Nombre:</label>
@@ -159,26 +159,18 @@ function handleSubmit(e){
               <lebel className={style.tipo}>Tipo:{" "}</lebel>
               <select className={style.tipoSelect} onChange={handleSelect}>
                 { pokesTypes.map((t)=>(
-                  <option value={t.name} key={t.id}>{t.name}</option>
+                  <option className={style.tipoOption} value={t.name} key={t.id}>{t.name}</option>
                   ))
                 } 
               </select>
              
                
-                {input.types.map(elem=> <div>
-                    
-                   <button onClick={()=>handleDelete(elem)}>{elem} </button>
-                 </div>)}
-               
-                
-{/*                
-                {input.types.map(elem=>
-                  <div>
-                    <p>{elem}</p>
-                   <button onClick={()=>handleDelete(elem)}>delete</button>
-                 </div>
-          )
-        } */}
+                {input.types.map(elem=> 
+                      <div className={style.divType} >
+                        <button onClick={()=>handleDelete(elem)}>{elem}  X</button>
+                      </div>
+                    )
+                }
             </div>
           </div>
           
@@ -192,7 +184,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.hp}
                 name='hp'
-                placeholder="vida de tu Pokemon"
+                placeholder="Vida de tu Pokemon"
                 onChange={handleChange}
               />
              {errors.hp && <p className={style.error}>{errors.hp}</p>}
@@ -207,7 +199,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.attack} 
                 name='attack'
-                placeholder="Nivel de Ataque de tu Pokemon"
+                placeholder="Ataque de tu Pokemon"
                 onChange={handleChange}/>
               {errors.attack && <p className={style.error}>{errors.attack}</p>}
             </div>
@@ -221,7 +213,7 @@ function handleSubmit(e){
                 type="number"
                 value={input.defense}
                 name='defense'
-                placeholder="Nivel de defensa de tu Pokemon"
+                placeholder="Defensa de tu Pokemon"
                 onChange={handleChange}/>
               {errors.defense && <p className={style.error}>{errors.defense}</p>}
             </div>
@@ -268,22 +260,15 @@ function handleSubmit(e){
             </div>
        
        </div>
-     
       
-       
-       <button >Crear</button>
-        
-     </form>
+      </form>
     </div>
-     
-   
-
-
     <div>
-      <Link to='/home'>Volver</Link><br />
+    <Btn1 handleSubmit={handleSubmit} className={style.btn1}/>
+    <Btn2 />
     </div>
-   
-    </div>
+        
+  </div>
   )
 }
 
