@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './styles/btn1.module.css'
+import style from '../styles/btn1.module.css'
 function btn1({handleSubmit}) {
 
   return (

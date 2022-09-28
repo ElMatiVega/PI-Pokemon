@@ -9,7 +9,7 @@ import Loading from './Loading';
 import style from './styles/home.module.css';
 import logo from '../components/Img&Gif/Logo.png';
 import PikaHass from '../components/Img&Gif/PikaHass.png';
-import BtnHaz from './btnHaz'
+import BtnHaz from './buttons/btnHaz'
 function Home() {
     const dispatch= useDispatch();
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
@@ -23,7 +23,7 @@ function Home() {
     const lastPokePage= currentPage * PokesForPage;// 12
     const firstPokePage= lastPokePage - PokesForPage;//0
     const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);
-   
+    const max = Math.ceil(allPokemons.length / PokesForPage)
     const [input, setInput] = useState(1)
 
     const [selected, setSelected] = useState(false);
@@ -98,12 +98,7 @@ return (
                <BtnHaz />
               </li>
                
-              <li>
-                <button className={style.buttons} onClick={event=>{handlerBack(event)}}>
-                  Volver a cargar todos los pokemones
-                </button>
-              </li>
-              
+
               <li>
                 <SearchBar
                 setInput={setInput}
@@ -111,6 +106,12 @@ return (
                 setSelected={setSelected}
                 allPokemons={allPokemons}
                 />
+              </li>
+
+              <li>
+                <button className={style.buttons} onClick={event=>{handlerBack(event)}}>
+                  Recargar pokemones
+                </button>
               </li>
             </ul>
           </div>
@@ -168,9 +169,11 @@ return (
 
       <div className={style.pagination}>
         <Pagination
-          PokesForPage={PokesForPage}//Estado local
-          allPokemons={allPokemons.length}//useSelector-->state.Pokemons
-          pagination={pagination}
+          input={input }
+          setInput={setInput}
+          currentPage={currentPage} 
+          setCurrentPage={setCurrentPage}
+          allPokemons={max}
         />
       </div>
       

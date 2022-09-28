@@ -5,6 +5,7 @@ import{useEffect} from 'react';
 import {getDetail} from '../actions/index';
 import Loading from '../components/Loading';
 import style from './styles/pokeDetail.module.css'
+import BtnBackDetail from './buttons/btnBackDetail'
 
 function PokeDetails(props) {
     console.log(props)
@@ -52,9 +53,10 @@ function PokeDetails(props) {
       </div>
       : <Loading/>
     }
-    <Link to='/home'>
-      <buttom>Volver</buttom>
-    </Link>
+    <div>
+      <BtnBackDetail />
+    </div>
+  
     </div>
   )
 }

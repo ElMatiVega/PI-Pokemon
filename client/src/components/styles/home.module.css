@@ -67,8 +67,10 @@ body{
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    align-content: center;
   }
   
 .menu ul li {
@@ -78,6 +80,8 @@ body{
   
 .menu ul li .buttons {
     color: #0d0d0d;
+    background-color:rgba(40, 194, 241, 0.207);
+    border-radius: 10px;
     display: block;
     padding: 15px 45px;
     text-decoration: none;
@@ -85,42 +89,75 @@ body{
     font-size: 20px;
     text-transform: uppercase;
     width: fit-content;
-    background: none;
     border: none;
     cursor: pointer;
 }
   
 .menu ul li .buttons:hover {
-    background-color: #fdeaaf;
+    background-color: #fde9af85;
     border-radius: 10px;
 }
 
 .filtered {
     background: none;
+    display: inline-flex;
+    justify-content: space-around;
   }
   
   .filtered ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    
   }
   
   .filtered ul li {
     display: inline-block;
     padding: 0px 29px;
     
+    
   }
   
   .filtered ul li select {
     color: #0d0d0d;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: larger;
     display: block;
     padding: 8px;
     width: auto;
-    background: none;
+    background-color:rgba(40, 194, 241, 0.207);
+    border-radius: 10px;
   }
   
   .filtered ul li select:hover {
-    background-color: #fceec4;
+    background-color: rgba(40, 194, 241, 0.207);
     cursor: pointer;
+  }
+  li{
+    margin-bottom: 10px;
+  }
+  @media screen and (max-width: 900px) {
+    .menu ul li .buttons{
+      display: flex;
+      width: 10em;
+      font-size: 16px;
+    font-weight: 600;
+    align-content: space-around;
+    justify-content: center;
+    }
+  
+  }
+  @media screen and (max-width: 700px){
+    .menu ul {
+      flex-direction: column;
+    }
+    .menu ul li .buttons{
+      display: flex;
+      width: 400px;
+      margin-bottom: 10px;
+      
+    }
+    li{
+      margin-bottom: 10px;
+    }
   }

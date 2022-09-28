@@ -6,10 +6,10 @@ import {getNamePokemons} from '../actions/index';
 import style from './styles/searchBar.module.css';
 import PikaBusca from "./Img&Gif/Pika.png";
 
-const SearchBar = ({ setInput, setCurrentPage, setSelected,allPokemons }) => {
+const SearchBar = ({ setInput, setCurrentPage, setSelected }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-  //const pokes = useSelector((state)=>state.pokemons)
+
 
   
   const handleInput = (e) => {//setea el estado con el valor del usuario.
@@ -26,13 +26,10 @@ const SearchBar = ({ setInput, setCurrentPage, setSelected,allPokemons }) => {
       setName("");
       setSelected(true);
     }else{
-      alert('Disculpe, Pokemon no encontrado');
+      alert('Por favor, escriba un nombre');
       setName("")
     }
-    // else if(allPokemons.length===0){
-    //   alert('Disculpe, Pokemon no encontrado');
-    //   setName("")
-    // }
+  
   };
   const handlerKeyEnter = (e) => {//se despacha accion cuando se da Enter
     if (e.keyCode === 13) {

@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+  }
+  
+  .buttons {
+    background-color: #f2bf27;
+    border: none;
+    width: 27px;
+    height: 27px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .buttons[disabled] {
+    background-color: #ffdf7e;
+    cursor: no-drop;
+  }
+  
+  .inputPag {
+    width: 21px;
+    height: 21px;
+    border: 1px solid #044ae2;
+    border-radius: 5px;
+    text-align: center;
+    color: #044ae2;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+  }
+  
+  .text {
+    color: #0d0d0d;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+  }
+
+  .imgPagination{
+    width:27px;
+    
+    
+  }
+  

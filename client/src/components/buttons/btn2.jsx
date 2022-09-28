@@ -1,7 +1,7 @@
 import React from 'react'
-import style from './styles/btn2.module.css'
+import style from '../styles/btn2.module.css'
 import { Link } from 'react-router-dom'
-function btn2({handleSubmit}) {
+function btn2() {
 
   return (
     <div className={style.cointainer}>

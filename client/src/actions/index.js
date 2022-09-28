@@ -57,8 +57,9 @@ export function getNamePokemons(name){
                 payload:pokeJson.data
             })
         } catch (error) {
-           return {error:error.message}
-            
+            console.log(error)
+          alert( error.response.data +'. Error '+ error.response.status)
+             
         }
        
     }

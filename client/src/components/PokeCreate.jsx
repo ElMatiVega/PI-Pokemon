@@ -4,8 +4,8 @@ import  {useState, useEffect} from 'react';
 import{postPokemon, getTypes} from '../actions/index';
 import{ useDispatch, useSelector} from 'react-redux';
 import style from './styles/pokeCreate.module.css';
-import Btn1 from './btn1';
-import Btn2 from './btn2';
+import Btn1 from './buttons/btn1';
+import Btn2 from './buttons/btn2';
 
 
 function validateForm(input){
@@ -126,10 +126,17 @@ function handleSubmit(e){
   return (
     <div className={style.CreateCointainer}>
       <h1 className={style.h1} >Crea tu Pokemon</h1>
+      {input.types.map(elem=> 
+                      <div className={style.divType} >
+                        <button className={style.btnDelete} onClick={()=>handleDelete(elem)}>{elem}  X</button>
+                      </div>
+                    )
+                }
       <div className={style.Main}>
+      
         <form >
           <div className={style.Left}>
-            <div>
+            <div className={style.divCreate}>
               <label>Nombre:</label>
               <input 
                 className={style.inputCreate}
@@ -142,7 +149,7 @@ function handleSubmit(e){
              {errors.name && <p className={style.error}>{errors.name}</p>}
             </div>
             <br />
-            <div>
+            <div className={style.divCreate}>
               <label>Imagen:</label>
               <input 
                     className={style.inputCreate}
@@ -155,7 +162,7 @@ function handleSubmit(e){
               {errors.img && <p className={style.error}>{errors.img}</p>}
             </div>
             <br />
-            <div>
+            <div className={style.divCreate}>
               <lebel className={style.tipo}>Tipo:{" "}</lebel>
               <select className={style.tipoSelect} onChange={handleSelect}>
                 { pokesTypes.map((t)=>(
@@ -165,17 +172,12 @@ function handleSubmit(e){
               </select>
              
                
-                {input.types.map(elem=> 
-                      <div className={style.divType} >
-                        <button onClick={()=>handleDelete(elem)}>{elem}  X</button>
-                      </div>
-                    )
-                }
+               
             </div>
           </div>
           
           <div className={style.Right}>
-            <div>
+            <div className={style.divCreate}>
               <label>Vida:</label>
               <input 
                 className={style.inputCreate}
@@ -190,7 +192,7 @@ function handleSubmit(e){
              {errors.hp && <p className={style.error}>{errors.hp}</p>}
             </div>
             <br />
-            <div>
+            <div className={style.divCreate}>
               <label>Ataque:</label>
               <input 
                 className={style.inputCreate}
@@ -204,7 +206,7 @@ function handleSubmit(e){
               {errors.attack && <p className={style.error}>{errors.attack}</p>}
             </div>
             <br />
-            <div>
+            <div className={style.divCreate}>
               <label>Defensa:</label>
               <input 
                 className={style.inputCreate}
@@ -218,7 +220,7 @@ function handleSubmit(e){
               {errors.defense && <p className={style.error}>{errors.defense}</p>}
             </div>
             <br />
-            <div>
+            <div className={style.divCreate}>
               <label>Velocidad:</label>
               <input 
                 className={style.inputCreate}
@@ -232,7 +234,7 @@ function handleSubmit(e){
               {errors.speed && <p className={style.error}>{errors.speed}</p>}
             </div>
             <br />
-            <div>
+            <div className={style.divCreate}> 
               <label>Altura:</label>
               <input 
                 className={style.inputCreate}
@@ -245,7 +247,7 @@ function handleSubmit(e){
                 onChange={handleChange}/>
                 {errors.height && <p className={style.error}>{errors.height}</p>}
             </div>
-            <div>
+            <div className={style.divCreate}>
               <label>Peso:</label>
               <input
                  className={style.inputCreate}
@@ -267,7 +269,7 @@ function handleSubmit(e){
     <Btn1 handleSubmit={handleSubmit} className={style.btn1}/>
     <Btn2 />
     </div>
-        
+   
   </div>
   )
 }
