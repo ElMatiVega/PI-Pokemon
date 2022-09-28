@@ -38,18 +38,6 @@ function PokeDetails(props) {
             <p>Velocidad: {detailPoke[0].speed}</p>
             <p>Vida: {detailPoke[0].hp}</p>
         </div>
-       
-
-        {/* <div className={`${styles.contenedorcito}`}>
-      <button className={`${styles.botoncito}`}onClick={aseguraOnClose}> X </button>
-      <h3 className={`${styles.namecita}`}> {name} </h3>
-      <img className={`${styles.imagencita}`} src={`http://openweathermap.org/img/wn/${img}@2x.png`} alt='img'  /> 
-     <div className={`${styles.temperaturitas}`}>
-      <p> Temp. Max. {`${ max}`}</p>
-      <p>Temp. Min. {`${min}`} </p>
-      </div>
-     </div>  */}
-
       </div>
       : <Loading/>
     }

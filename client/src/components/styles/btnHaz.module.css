@@ -83,7 +83,10 @@
 }
 .Link{
     text-decoration: none;
-    color: #044ae2;
+    color: #0d0d0d;
+    font-size:larger;
+    font-weight: 800;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .Link:hover{
     color:rgba(255, 238, 0, 0.726)

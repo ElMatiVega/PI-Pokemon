@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  cursor: url(./components/Img&Gif/pikaPointer.png), auto;
+  cursor: url('./components/Img&Gif/pikaPointer.png'), auto;
 }
 
 .App-logo {
