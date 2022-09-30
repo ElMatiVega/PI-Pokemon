@@ -126,7 +126,6 @@ let typeDb = await Type.findAll({
 pokemonCreated.addType(typeDb)
 res.send('Pokemon creado exitosamente')
   })
-  
 
 
 //Pedido de info según ID
@@ -140,5 +139,25 @@ res.send('Pokemon creado exitosamente')
     res.status(404).send('El poke no existe')
   }
 })
+
+
+router.delete("/pokemons/:id", async (req, res) => {
+  const { id } = req.params;
+console.log(id)
+    if (id) {
+      const pokeDelet = await Pokemon.findByPk(id);
+      if (pokeDelet["itsCreated"]) {
+        await pokeDelet.destroy();
+        return res.send(
+          "El Pokemon ha sido borrado"
+        );
+      } else {
+        return res
+          .status(404)
+          .json("No se puede borrar un Pokemon Original");
+      }
+    }
+  
+});
 module.exports = router;
 

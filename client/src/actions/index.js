@@ -98,3 +98,30 @@ export function  getDetail (id){
     }
 }
 
+export function deletePokemon(id){
+    return async (dispatch) => {
+      try {
+        const json = await axios.delete(`http://localhost:3001/pokemons/delete/${id}`);
+        return dispatch({
+          type: "DELETE_POKEMON",
+          payload: json.data,
+        });
+      } catch (error) {
+        console.log( error);
+        alert( error.response.data +'. Error '+ error.response.status)
+      }
+    };
+  };
+  export const cleanDetail = () => {
+    return {
+      type: "CLEAN_DETAIL",
+      payload: null,
+    };
+  };
+  
+  export const cleanPokemons = () => {
+    return {
+      type: "CLEAN_POKEMONS",
+      payload: [],
+    };
+  };

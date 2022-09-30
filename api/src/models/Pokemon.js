@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
     img:{
       type:DataTypes.STRING,
       defaultValue:
-      "https://c.tenor.com/llY4dBe08RkAAAAi/pikachu.gif",
+      "https://static.wikia.nocookie.net/eswikia/images/d/df/Pok%C3%A9mon.png/revision/latest?cb=20170308220152",
     // validate: { isUrl: true },
     },
     itsCreated: {

@@ -1,7 +1,6 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderAttack } from '../actions';
-import {Link} from 'react-router-dom';
 import Card from './Card';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar';
@@ -15,7 +14,7 @@ function Home() {
     const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
     const Load= useSelector((state)=>state.loading)
     const allTypes= useSelector((state)=>state.types)
-   // const error= useSelector((state)=>state.error)
+
     
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
@@ -27,20 +26,14 @@ function Home() {
     const [input, setInput] = useState(1)
 
     const [selected, setSelected] = useState(false);
-
+    const [order, setOrder]= useState('')
 
 useEffect(()=>{
       dispatch(getPokemons());
       dispatch(getTypes());
     },[dispatch]);
-
-
-    const pagination=(pageNumber)=>{
-        setCurrentPage(pageNumber)
-    }
-
  
-const [order, setOrder]= useState('')
+
 
  //Ordenar ALFABETICAMENTE
 function handlerSort(e){
@@ -124,7 +117,7 @@ return (
                   <option value="title" selected={selected} disabled>
                    Ordenar Alfabeticamente
                   </option>
-                  <option value="asc">A-Z</option>// el value es el payload del reducer
+                  <option value="asc">A-Z</option>
                   <option value="desc">Z-A</option>
                 </select> 
               </li>

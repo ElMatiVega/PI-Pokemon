@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useSelector } from "react";
+import { useState} from "react";
 import{useDispatch} from 'react-redux';
 import {getNamePokemons} from '../actions/index';
 

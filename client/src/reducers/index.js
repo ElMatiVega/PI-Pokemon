@@ -105,18 +105,18 @@ function rootReducer(state= initialState, action){
           return{
             ...state,
             pokemons:action.payload
-          }
+          };
 
         case "POST_POKEMON":
             return{
               ...state,
-            }
+            };
             
         case "GET_DETAILS":
           return{
             ...state,
             pokeDetail:action.payload 
-          }
+          };
 
         case 'FILTER_BY_TYPE':
                 const allPokemons = state.allPokemons
@@ -138,8 +138,25 @@ function rootReducer(state= initialState, action){
                 return{
                      ...state,
                      pokemons: filterType
-                }
+                };
 
+
+        case "DELETE_POKEMON":
+          return { 
+            ...state 
+          };
+
+        case "CLEAN_DETAIL":
+          return { 
+            ...state, 
+            pokeDetail: action.payload,
+            error: null };
+        
+        case "CLEAN_POKEMONS":
+          return {
+            ...state, 
+            pokemons: action.payload };
+       
         default:
             return{...state}
     }

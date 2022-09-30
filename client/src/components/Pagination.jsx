@@ -6,13 +6,13 @@ import style from './styles/pagination.module.css'
 function Pagination({ input, setInput, currentPage, setCurrentPage, allPokemons}) {
 
     const nextPage = () => {
-        setInput(parseInt(currentPage) + 1);
-        setCurrentPage(parseInt(currentPage) + 1);
+        setInput(currentPage + 1);
+        setCurrentPage(currentPage + 1);
       };
     
       const previousPage = () => {
-        setInput(parseInt(currentPage) - 1);
-        setCurrentPage(parseInt(currentPage) - 1);
+        setInput(currentPage - 1);
+        setCurrentPage(currentPage - 1);
       };
     
       const onKeyDown = (e) => {

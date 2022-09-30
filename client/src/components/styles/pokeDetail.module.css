@@ -27,13 +27,18 @@ body{
     font-style: italic;
     border: #fad56675 solid 4px;
     background-color:rgba(40, 194, 241, 0.207);
+    transition: 1s;
+
 }
 .PokeDetails:hover{
     color:black;
     border: #f7d202 solid 4px; 
     background-color: rgba(5, 98, 204, 0.603);
     width:20em;
-    transition: .5s;
+    transition: 1s;
+}
+.PokeDetails:active{
+    transition:1s;
 }
 
    

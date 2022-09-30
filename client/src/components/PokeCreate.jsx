@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useHistory} from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import  {useState, useEffect} from 'react';
 import{postPokemon, getTypes} from '../actions/index';
 import{ useDispatch, useSelector} from 'react-redux';
@@ -13,7 +13,7 @@ function validateForm(input){
   if(!/((?=.)^[a-zA-Z\s]{1,19}[a-zA-Z]$)|((?!._)^[a-zA-Z\s]{1,20}$)/.test(input.name)){ 
     errors.name= 'Se requiere un nombre';
   }else if(!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(input.img)) {
-    errors.img= 'Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg, Aviso: de no ser provista tendra una por defecto'
+    errors.img= `Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg.`
 
 }else if(input.types.length ===0 || input.types.length > 3) {
   errors.Types= 'Selecciona hasta 3 tipos'
@@ -43,7 +43,7 @@ function PokeCreate() {
     const dispatch= useDispatch();
     const history= useHistory();
     const pokesTypes= useSelector((state)=> state.types);
-    const pokemons=useSelector((state)=>state.allPokemons);
+    //const pokemons=useSelector((state)=>state.allPokemons);
     
   
     const [errors,setErrors] = useState({});
@@ -171,7 +171,7 @@ function handleSubmit(e){
                 } 
               </select>
              
-               
+              {errors.types && <p className={style.error}>{errors.types}</p>}
                
             </div>
           </div>
@@ -186,7 +186,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.hp}
                 name='hp'
-                placeholder="Vida de tu Pokemon"
+                placeholder="0 <-> 200"
                 onChange={handleChange}
               />
              {errors.hp && <p className={style.error}>{errors.hp}</p>}
@@ -201,7 +201,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.attack} 
                 name='attack'
-                placeholder="Ataque de tu Pokemon"
+                placeholder="10 <-> 150"
                 onChange={handleChange}/>
               {errors.attack && <p className={style.error}>{errors.attack}</p>}
             </div>
@@ -215,7 +215,7 @@ function handleSubmit(e){
                 type="number"
                 value={input.defense}
                 name='defense'
-                placeholder="Defensa de tu Pokemon"
+                placeholder="10 <-> 150"
                 onChange={handleChange}/>
               {errors.defense && <p className={style.error}>{errors.defense}</p>}
             </div>
@@ -229,7 +229,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.speed} 
                 name='speed'
-                placeholder="Velocidad de tu Pokemon"
+                placeholder="5 <-> 150"
                 onChange={handleChange}/>
               {errors.speed && <p className={style.error}>{errors.speed}</p>}
             </div>
@@ -243,7 +243,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.height}
                 name='height'
-                placeholder="Altura de tu Pokemon"
+                placeholder="5 <-> 200"
                 onChange={handleChange}/>
                 {errors.height && <p className={style.error}>{errors.height}</p>}
             </div>
@@ -256,7 +256,7 @@ function handleSubmit(e){
                 type="number" 
                 value={input.weight} 
                 name='weight'
-                placeholder="Peso de tu Pokemon"
+                placeholder="5 <-> 200"
                 onChange={handleChange}/>
               {errors.weight && <p className={style.error}>{errors.weight}</p>}
             </div>
