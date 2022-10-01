@@ -15,7 +15,7 @@ function Loading() {
               src={fueguitoLoading}
               alt="Pokeimage not found"
               />
-            <h2 className={styles.loadingText}> Loading... </h2>
+            <h2 className={styles.loadingText}> Cargando... </h2>
           </div>
     </div>
   )

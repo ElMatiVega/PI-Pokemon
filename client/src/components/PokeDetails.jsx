@@ -42,14 +42,7 @@ function PokeDetails(props) {
         <div >
            <h1>Soy {detailPoke[0].name}</h1>
            <img className={style.imagencita}src={detailPoke[0].img2?detailPoke[0].img2:detailPoke[0].img} alt='pokeImg' />
-           <div className={style.deletePoke}>
-              <button
-                    className="deleteButton"
-                    onClick={() => handleDelete()}
-                  >
-                    Borrar Pokemon
-                  </button>
-                </div>
+           
         </div>
         <div className={style.PokeDetails}>
             <h3>Tipo: {detailPoke[0].itsCreated ? detailPoke[0].types.map(t=>t.name+' '): detailPoke[0].type }</h3>
