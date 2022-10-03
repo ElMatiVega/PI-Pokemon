@@ -1,8 +1,7 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import{useEffect} from 'react';
-import {getDetail, deletePokemon,cleanDetail, cleanPokemons} from '../actions/index';
+import {getDetail} from '../actions/index';
 import Loading from '../components/Loading';
 import style from './styles/pokeDetail.module.css'
 import BtnBackDetail from './buttons/btnBackDetail'
@@ -10,28 +9,14 @@ import BtnBackDetail from './buttons/btnBackDetail'
 function PokeDetails(props) {
     //console.log(props)
     const id=props.match.params.id;
-    const history = useHistory();
     const dispatch = useDispatch();
     const detailPoke= useSelector((state)=>state.pokeDetail);
 
     useEffect(()=>{
         dispatch(getDetail(id));
-        dispatch(cleanPokemons())
+        
     },[dispatch,id])
 
-
-
-  const handleDelete = () => {
-    if (detailPoke["itsCreated"]) {
-      dispatch(deletePokemon(id));
-      dispatch(cleanDetail());
-      dispatch(cleanPokemons());
-      alert("Tu Pokemon ha sido borrado");
-      history.push("/home");
-    } else {
-      alert("alert salido del  handleDelete");
-    }
-  };
 
 
   return (

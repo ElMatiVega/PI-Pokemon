@@ -1,5 +1,5 @@
 import axios from 'axios';
-//import {GET_POKEMONS, FILTER_BY_TYPE} from '../actions/const_action.js';
+
 
 export function getPokemons(){
     
@@ -48,38 +48,22 @@ export function filterByType (payload) {
   
   //BUSCO INFO QUERY para searchBar
 
-// export function getNamePokemons(name){
-//     return async function(dispatch){
-//         try {
-//             var pokeJson= await axios.get(`http://localhost:3001/pokemons?name=${name}`);
-//             return dispatch({
-//                 type:"GET_NAME_POKEMONS",
-//                 payload:pokeJson.data
-//             })
-//         } catch (error) {
-//             console.log(error)
-//           alert( error.response.data +'. Error '+ error.response.status)
+export function getNamePokemons(name){
+    return async function(dispatch){
+        try {
+            var pokeJson= await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+            return dispatch({
+                type:"GET_NAME_POKEMONS",
+                payload:pokeJson.data
+            })
+        } catch (error) {
+            console.log(error)
+          alert( error.response.data +'. Error '+ error.response.status)
              
-//         }
+        }
        
-//     }
-// }
-
-export function getNamePokemons(name) {
-    return function(dispatch) {
-        
-            return axios(`http://localhost:3001/pokemons?name=${name}`)
-            .then(res => {
-                if(res.response.status===404){
-                    throw Error(res.response)
-                }
-                dispatch({
-                    type: "GET_NAME_POKEMONS",
-                    payload: res.data });
-                    
-                }).catch(function(error){alert(error.response.data+' Error'+ error.response.status)}  ) 
-     };
     }
+}
 
 
 export function getTypes(){
@@ -114,30 +98,7 @@ export function  getDetail (id){
     }
 }
 
-export function deletePokemon(id){
-    return async (dispatch) => {
-      try {
-        const json = await axios.delete(`http://localhost:3001/pokemons/delete/${id}`);
-        return dispatch({
-          type: "DELETE_POKEMON",
-          payload: json.data,
-        });
-      } catch (error) {
-        console.log( error);
-        alert( error.response.data +'. Error '+ error.response.status)
-      }
-    };
-  };
-  export const cleanDetail = () => {
-    return {
-      type: "CLEAN_DETAIL",
-      payload: null,
-    };
-  };
+
+
   
-  export const cleanPokemons = () => {
-    return {
-      type: "CLEAN_POKEMONS",
-      payload: [],
-    };
-  };
+ 
