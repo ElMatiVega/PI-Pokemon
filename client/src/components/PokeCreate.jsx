@@ -15,8 +15,8 @@ function validateForm(input){
   }else if(!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(input.img)) {
     errors.img= `Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg.`
 
-}else if(input.types.length ===0 || input.types.length > 3) {
-  errors.Types= 'Selecciona hasta 3 tipos'
+}else if(input.types.length < 1 || input.types.length > 3) {
+  errors.types= 'Selecciona hasta 3 tipos'
 }else if(input.hp < 1 || input.hp > 200) { 
     errors.hp = 'Vida requiere un valor entre 0 y 200'
 
@@ -43,7 +43,7 @@ function PokeCreate() {
     const dispatch= useDispatch();
     const history= useHistory();
     const pokesTypes= useSelector((state)=> state.types);
-    //const pokemons=useSelector((state)=>state.allPokemons);
+   
     
   
     const [errors,setErrors] = useState({});
@@ -100,7 +100,7 @@ function handleSubmit(e){
     input.height &&
     input.weight &&
     input.hp &&
-    input.types.length >0 && input.types.length < 3)
+    input.types.length > 0 && input.types.length < 4)
  { e.preventDefault();
   dispatch(postPokemon(input));
   alert("Pokemon creado");
@@ -169,9 +169,10 @@ function handleSubmit(e){
                   <option className={style.tipoOption} value={t.name} key={t.id}>{t.name}</option>
                   ))
                 } 
+               
               </select>
-             
               {errors.types && <p className={style.error}>{errors.types}</p>}
+              
                
             </div>
           </div>

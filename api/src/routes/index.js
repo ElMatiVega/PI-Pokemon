@@ -73,7 +73,7 @@ const getApiInfo = async () => {
           let ponkemonName= await pokemonsTotal.filter(elem=>elem.name.toLowerCase().includes(name.toLowerCase()));
           ponkemonName.length ?
           res.status(200).send(ponkemonName)
-          : res.status(404).json('Nombre no encontrado')       
+          : res.status(404).json(`El pokemon ${name} no se encuentra `)       
           }else{
           res.status(200).send(pokemonsTotal)
       }

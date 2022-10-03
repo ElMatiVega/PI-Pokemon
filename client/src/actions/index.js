@@ -48,22 +48,38 @@ export function filterByType (payload) {
   
   //BUSCO INFO QUERY para searchBar
 
-export function getNamePokemons(name){
-    return async function(dispatch){
-        try {
-            var pokeJson= await axios.get(`http://localhost:3001/pokemons?name=${name}`);
-            return dispatch({
-                type:"GET_NAME_POKEMONS",
-                payload:pokeJson.data
-            })
-        } catch (error) {
-            console.log(error)
-          alert( error.response.data +'. Error '+ error.response.status)
+// export function getNamePokemons(name){
+//     return async function(dispatch){
+//         try {
+//             var pokeJson= await axios.get(`http://localhost:3001/pokemons?name=${name}`);
+//             return dispatch({
+//                 type:"GET_NAME_POKEMONS",
+//                 payload:pokeJson.data
+//             })
+//         } catch (error) {
+//             console.log(error)
+//           alert( error.response.data +'. Error '+ error.response.status)
              
-        }
+//         }
        
+//     }
+// }
+
+export function getNamePokemons(name) {
+    return function(dispatch) {
+        
+            return axios(`http://localhost:3001/pokemons?name=${name}`)
+            .then(res => {
+                if(res.response.status===404){
+                    throw Error(res.response)
+                }
+                dispatch({
+                    type: "GET_NAME_POKEMONS",
+                    payload: res.data });
+                    
+                }).catch(function(error){alert(error.response.data+' Error'+ error.response.status)}  ) 
+     };
     }
-}
 
 
 export function getTypes(){
