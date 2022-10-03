@@ -70,7 +70,7 @@ const getApiInfo = async () => {
       const name=req.query.name;
       let pokemonsTotal=await getAllPokemons();
       if(name){
-          let ponkemonName= await pokemonsTotal.filter(elem=>elem.name.toLowerCase().includes(name.toLowerCase()));
+          let ponkemonName= await pokemonsTotal.filter(elem=>elem.name.toLowerCase()===name.toLowerCase());
           ponkemonName.length ?
           res.status(200).send(ponkemonName)
           : res.status(404).json(`El pokemon ${name} no se encuentra `)       
@@ -115,7 +115,7 @@ let pokemonCreated = await Pokemon.create({
   speed,
   height,
   weight,
-  img,
+  img: img? img: 'https://e.rpp-noticias.io/large/2016/07/22/151715_200529.jpg',
   types,
   itsCreated
 })

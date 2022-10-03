@@ -15,8 +15,6 @@ function validateForm(input){
   }else if(!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(input.img)) {
     errors.img= `Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg.`
 
-}else if(input.types.length < 1 || input.types.length > 3) {
-  errors.types= 'Selecciona hasta 3 tipos'
 }else if(input.hp < 1 || input.hp > 200) { 
     errors.hp = 'Vida requiere un valor entre 0 y 200'
 
@@ -92,7 +90,6 @@ function PokeCreate() {
 
 function handleSubmit(e){
   if (
-    input.img &&
     input.name  &&
     input.attack &&
     input.defense &&
@@ -156,7 +153,7 @@ function handleSubmit(e){
                     type="url" 
                     value={input.img}
                     name='img'
-                    placeholder="URL de la imagen"
+                    placeholder="URL /jpg,jpeg,webp,avif,gif,svg o se generará automaticamente "
                     onChange={handleChange}
               />
               {errors.img && <p className={style.error}>{errors.img}</p>}
