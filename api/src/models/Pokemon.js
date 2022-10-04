@@ -42,9 +42,7 @@ module.exports = (sequelize) => {
     },
     img:{
       type:DataTypes.STRING,
-      defaultValue:
-      "https://static.wikia.nocookie.net/eswikia/images/d/df/Pok%C3%A9mon.png/revision/latest?cb=20170308220152",
-    // validate: { isUrl: true },
+    
     },
     itsCreated: {
       type: DataTypes.BOOLEAN,

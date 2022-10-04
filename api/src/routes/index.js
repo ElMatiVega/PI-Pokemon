@@ -20,6 +20,7 @@ const getApiInfo = async () => {
       for (let p of allPokemons) {
         let url = await axios.get(p.url);
         delete p.url;
+        p.name=p.name;
         p.id = url.data.id;
         p.img = url.data.sprites.other.home.front_default;
         p.img2 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${url.data.id}.png`;
@@ -31,7 +32,7 @@ const getApiInfo = async () => {
         p.weight = url.data.weight;
         p.type =url.data.types.map((el) => el.type.name.charAt(0).toUpperCase()+  el.type.name.slice(1)+' ');
       }
-      //console.log(allPokemons)
+      console.log(allPokemons)
       return allPokemons;
     } catch (error) {
       console.log(error);
@@ -41,7 +42,7 @@ const getApiInfo = async () => {
   const getDbInfo = async ()=>{
     
      const pokemons= await  Pokemon.findAll({
-        include:Type,
+         
         include:{
             model:Type,
             attributes:['name'],
@@ -84,9 +85,9 @@ const getApiInfo = async () => {
   router.get('/types', async (req,res)=>{
  try {
   const typesApi= await axios.get('https://pokeapi.co/api/v2/type');
-     
+     //console.log(typesApi)
   const typesApi2= typesApi.data.results;
-  
+  //console.log(typesApi2)
   const onlyTypes =await typesApi2.map(elem=>elem.name);
   
   onlyTypes.forEach((type) => {
@@ -116,7 +117,6 @@ let pokemonCreated = await Pokemon.create({
   height,
   weight,
   img: img? img: 'https://e.rpp-noticias.io/large/2016/07/22/151715_200529.jpg',
-  types,
   itsCreated
 })
 
