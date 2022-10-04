@@ -64,6 +64,7 @@ body{
 .imagencita{
     position: relative;
     width:15em; 
+    border-radius: 10px;
    
 }
 .imagencita:hover{
