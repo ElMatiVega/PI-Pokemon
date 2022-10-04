@@ -146,16 +146,6 @@ function rootReducer(state= initialState, action){
             ...state 
           };
 
-        case "CLEAN_DETAIL":
-          return { 
-            ...state, 
-            pokeDetail: action.payload,
-            error: null };
-        
-        case "CLEAN_POKEMONS":
-          return {
-            ...state, 
-            pokemons: action.payload };
        
         default:
             return{...state}

@@ -12,10 +12,7 @@ function validateForm(input){
   let errors= {};
   if(!/((?=.)^[a-zA-Z\s]{1,19}[a-zA-Z]$)|((?!._)^[a-zA-Z\s]{1,20}$)/.test(input.name)){ 
     errors.name= 'Se requiere un nombre';
-  }else if(!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(input.img)) {
-    errors.img= `Se requiere una URL de tipo jpg,jpeg,webp,avif,gif,svg.`
-
-}else if(input.hp < 1 || input.hp > 200) { 
+  }else if(input.hp < 1 || input.hp > 200) { 
     errors.hp = 'Vida requiere un valor entre 0 y 200'
 
 }else if(input.attack < 10 || input.attack > 150) {
@@ -156,7 +153,7 @@ function handleSubmit(e){
                     placeholder="URL /jpg,jpeg,webp,avif,gif,svg o se generará automaticamente "
                     onChange={handleChange}
               />
-              {errors.img && <p className={style.error}>{errors.img}</p>}
+              
             </div>
             <br />
             <div className={style.divCreate}>

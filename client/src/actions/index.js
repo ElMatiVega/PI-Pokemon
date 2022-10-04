@@ -98,6 +98,24 @@ export function  getDetail (id){
     }
 }
 
+export function deletePokemon(id){
+    console.log(id,"soy la action")
+    return async (dispatch) => {
+      try {
+        const json = await axios.delete(`http://localhost:3001/pokemons/${id}`);
+        console.log(json, "soy el JSON")
+        return dispatch({
+          type: "DELETE_POKEMON",
+          payload: json.data.id
+        });
+        
+      } catch (error) {
+        console.log( error,'mati');
+        //alert( error.response.data +'. Error '+ error.response.status)
+      }
+      
+    };
+  };
 
 
   

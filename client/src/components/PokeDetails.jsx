@@ -1,14 +1,17 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import{useEffect} from 'react';
-import {getDetail} from '../actions/index';
+import {getDetail, deletePokemon} from '../actions/index';
 import Loading from '../components/Loading';
-import style from './styles/pokeDetail.module.css'
-import BtnBackDetail from './buttons/btnBackDetail'
+import style from './styles/pokeDetail.module.css';
+import BtnBackDetail from './buttons/btnBackDetail';
+import BtnDelete from './buttons/BtnDelete';
 
 function PokeDetails(props) {
     //console.log(props)
     const id=props.match.params.id;
+    const history = useHistory();
     const dispatch = useDispatch();
     const detailPoke= useSelector((state)=>state.pokeDetail);
 
@@ -17,6 +20,12 @@ function PokeDetails(props) {
         
     },[dispatch,id])
 
+    const handleDelete = (id) => {
+    
+      dispatch(deletePokemon(id));
+      alert("Tu Pokemon ha sido borrado");
+      history.push("/home");
+    };
 
 
   return (
@@ -24,10 +33,16 @@ function PokeDetails(props) {
     {
       detailPoke.length>0 ?
       <div className={style.BGDetail}>
-        <div >
+        <div className={style.grup}>
            <h1>Soy {detailPoke[0].name}</h1>
            <img className={style.imagencita}src={detailPoke[0].img2?detailPoke[0].img2:detailPoke[0].img} alt='pokeImg' />
-           
+           <div className={style.deletePoke}>
+              {
+                detailPoke[0].itsCreated
+                ?< BtnDelete handleDelete={handleDelete} id={detailPoke[0].id}/>
+                :console.log("chiringuito") 
+              } 
+           </div>
         </div>
         <div className={style.PokeDetails}>
             <h3>Tipo: {detailPoke[0].itsCreated ? detailPoke[0].types.map(t=>t.name+' '): detailPoke[0].type }</h3>

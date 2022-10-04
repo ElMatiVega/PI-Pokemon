@@ -18,7 +18,7 @@ function Home() {
     
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
-    const [PokesForPage]= useState(12);//es el número de pokes por pagina
+    const PokesForPage =12;//es el número de pokes por pagina
     const lastPokePage= currentPage * PokesForPage;// 12
     const firstPokePage= lastPokePage - PokesForPage;//0
     const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);

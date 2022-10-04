@@ -19,6 +19,10 @@ body{
     margin: 1em;
     align-content: stretch;
 }
+.grup{
+    display: flex;
+    flex-direction: column-reverse;
+}
 .PokeDetails{
     color: #044ae2;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
