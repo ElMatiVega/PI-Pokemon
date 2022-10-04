@@ -46,6 +46,7 @@ function PokeDetails(props) {
         </div>
         <div className={style.PokeDetails}>
             <h3>Tipo: {detailPoke[0].itsCreated ? detailPoke[0].types.map(t=>t.name+' '): detailPoke[0].type }</h3>
+            <p>ID: {detailPoke[0].id}</p>
             <p>Altura: {detailPoke[0].height}</p>
             <p>Ataque: {detailPoke[0].attack}</p>
             <p>Defensa:{detailPoke[0].defense}</p>

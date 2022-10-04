@@ -20,7 +20,6 @@ const getApiInfo = async () => {
       for (let p of allPokemons) {
         let url = await axios.get(p.url);
         delete p.url;
-        p.name=p.name;
         p.id = url.data.id;
         p.img = url.data.sprites.other.home.front_default;
         p.img2 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${url.data.id}.png`;
@@ -32,7 +31,7 @@ const getApiInfo = async () => {
         p.weight = url.data.weight;
         p.type =url.data.types.map((el) => el.type.name.charAt(0).toUpperCase()+  el.type.name.slice(1)+' ');
       }
-      console.log(allPokemons)
+      //console.log(allPokemons)
       return allPokemons;
     } catch (error) {
       console.log(error);
@@ -117,6 +116,7 @@ let pokemonCreated = await Pokemon.create({
   height,
   weight,
   img: img? img: 'https://e.rpp-noticias.io/large/2016/07/22/151715_200529.jpg',
+  types,
   itsCreated
 })
 
@@ -131,6 +131,20 @@ res.send('Pokemon creado exitosamente')
 //Pedido de info según ID
   router.get('/pokemons/:id', async(req,res)=>{
   const{id}=req.params;
+  const pokesTotal= await getAllPokemons();
+  if(id){
+    let pokeId= await pokesTotal.filter(elem=>elem.id==id)
+    pokeId.length?
+    res.status(200).json(pokeId):
+    res.status(404).send('El poke no existe')
+  }
+})
+
+// http://localhost:3001/pokemons/pokename?id=25
+// ruta Name por query
+
+router.get('/pokemons/pokename', async(req,res)=>{
+  const{id}=req.query;
   const pokesTotal= await getAllPokemons();
   if(id){
     let pokeId= await pokesTotal.filter(elem=>elem.id==id)
@@ -159,5 +173,7 @@ console.log(id)
     }
   
 });
+
+
 module.exports = router;
 

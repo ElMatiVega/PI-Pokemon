@@ -134,7 +134,7 @@ function handleSubmit(e){
               <label>Nombre:</label>
               <input 
                 className={style.inputCreate}
-               type='text'
+                type='text'
                 value={input.name} 
                 name='name'
                 placeholder="Nombre de tu Pokemon"
