@@ -28,6 +28,15 @@ function rootReducer(state= initialState, action){
 
         }
 
+        case 'POKE_RANDOM':
+          let pokeRandom=  state.pokemons;
+          let thePoke= pokeRandom[Math.floor(Math.random()* pokeRandom.length)]
+          console.log(thePoke)
+          return{
+            ...state,
+            pokemons:thePoke
+          }
+
 
         case 'GET_TYPE':
         return { ...state, types: action.payload };
@@ -67,6 +76,40 @@ function rootReducer(state= initialState, action){
                   ...state,
                   pokemons:sortPokes
               }
+
+        case 'ORDER_TOP5':
+          let top5Pokes= state.allPokemons;
+          let topFivesPokes= action.payload ==='topweak'?
+          top5Pokes.sort(function (a, b) {
+            if (a.attack=== null) {
+              return 0;
+          }
+              if (a.attack > b.attack) {
+                return 1;
+              }
+              if (a.attack < b.attack) {
+                return -1;
+              }
+              // a === b
+              return 0;
+            }) :
+            top5Pokes.sort(function (a, b) {
+              if (a.attack === null) {
+                return 0;
+            }
+              if (a.attack < b.attack) {
+                return 1;
+              }
+              if (a.attack > b.attack) {
+                return -1;
+              }        
+              return 0;
+            });
+            return{
+                ...state,
+                pokemons:topFivesPokes.slice(0,5)
+            }
+
 
         case 'ORDER_ATTACK':
           let pokeAttack=state.pokemons

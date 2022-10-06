@@ -36,7 +36,19 @@ export function orderAttack(payload){
     }
 }
 
-
+//EXTRAS
+export function pokeRandom(){
+    return{
+        type:'POKE_RANDOM',
+        
+    }
+}
+export function topFive(payload){
+    return{
+        type:'ORDER_TOP5',
+        payload
+    }
+}
 
 export function filterByType (payload) {
     return {
@@ -118,5 +130,5 @@ export function deletePokemon(id){
   };
 
 
-  
+ 
  

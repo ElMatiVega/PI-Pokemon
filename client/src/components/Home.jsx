@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderAttack } from '../actions';
+import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderAttack, topFive,pokeRandom} from '../actions';
 import Card from './Card';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar';
@@ -55,14 +55,21 @@ function handlerAttack(e){
 
 }
 
+function handlerTop(e){
+  e.preventDefault();
+  dispatch(topFive(e.target.value))
+  setOrder(`Ordenado ${e.target.value}`)
+  setCurrentPage(1);
+  setInput(1);
+}
 
-    function handlerBack (e){
+function handlerBack (e){
         e.preventDefault();
         dispatch(getPokemons());
        
     }
 
-    const handleTypeOptions = (e) => {
+const handleTypeOptions = (e) => {
         e.preventDefault(e);
         dispatch(filterByType(e.target.value));
         setInput(1);
@@ -70,10 +77,17 @@ function handlerAttack(e){
        
       };
 
-    function handleFfilterCreated(e){
+function handleFfilterCreated(e){
       dispatch (filterCreated(e.target.value)) 
      
     }
+
+function handlerRandom (e){
+        e.preventDefault(e);
+        dispatch(pokeRandom(e.target.value));
+        setInput(1);
+        setCurrentPage(1);
+}
     
 return (
 
@@ -104,6 +118,11 @@ return (
               <li>
                 <button className={style.buttons} onClick={event=>{handlerBack(event)}}>
                   Recargar pokemones
+                </button>
+              </li>
+              <li>
+                <button className={style.buttons} onClick={event=>{handlerRandom(event)}}>
+                  Poke Aleatorio
                 </button>
               </li>
             </ul>
@@ -140,6 +159,18 @@ return (
                   <option value="Poderoso">Poderoso</option>
                 </select>
               </li>
+
+            
+              <li>
+                <select defaultValue="title" onChange={(e) => handlerTop(e)}>
+                  <option value="title" selected={selected} disabled>
+                    los 5 mas.....
+                  </option>
+                  <option value='topweak'>5 más debiluchos</option>
+                  <option value='topPower'>5 más grosos</option>
+                </select>
+              </li>
+
               <li>
                 <select defaultValue="title" onChange={(e) => handleTypeOptions(e)}>
                   <option value="title" selected={selected} disabled>
