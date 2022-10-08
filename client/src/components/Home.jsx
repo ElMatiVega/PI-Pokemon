@@ -22,6 +22,7 @@ function Home() {
     const lastPokePage= currentPage * PokesForPage;// 12
     const firstPokePage= lastPokePage - PokesForPage;//0
     const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);
+ 
     const max = Math.ceil(allPokemons.length / PokesForPage)
     const [input, setInput] = useState(1)
 
@@ -31,6 +32,7 @@ function Home() {
 useEffect(()=>{
       dispatch(getPokemons());
       dispatch(getTypes());
+     
     },[dispatch]);
  
 
@@ -55,13 +57,7 @@ function handlerAttack(e){
 
 }
 
-function handlerTop(e){
-  e.preventDefault();
-  dispatch(topFive(e.target.value))
-  setOrder(`Ordenado ${e.target.value}`)
-  setCurrentPage(1);
-  setInput(1);
-}
+
 
 function handlerBack (e){
         e.preventDefault();
@@ -82,9 +78,18 @@ function handleFfilterCreated(e){
      
     }
 
+function handlerTop(e){
+      e.preventDefault();
+      dispatch(topFive(e.target.value))
+      setOrder(`Ordenado ${e.target.value}`)
+      setCurrentPage(1);
+      setInput(1);
+    }
+
 function handlerRandom (e){
         e.preventDefault(e);
-        dispatch(pokeRandom(e.target.value));
+        dispatch(pokeRandom());
+        setOrder(`Ordenado `)
         setInput(1);
         setCurrentPage(1);
 }
@@ -164,10 +169,10 @@ return (
               <li>
                 <select defaultValue="title" onChange={(e) => handlerTop(e)}>
                   <option value="title" selected={selected} disabled>
-                    los 5 mas.....
+                    los 4 mas...
                   </option>
-                  <option value='topweak'>5 más debiluchos</option>
-                  <option value='topPower'>5 más grosos</option>
+                  <option value='topweak'>4 más livianos</option>
+                  <option value='topPower'>4 más pesados</option>
                 </select>
               </li>
 
@@ -205,9 +210,10 @@ return (
          { 
           Load? 
             <div><Loading/></div>
-            :currentPokes && currentPokes.map(poke=>{
+            :currentPokes  && currentPokes.map(poke=>{
               return(
-                <>               
+                <>
+                              
                 <Card
                     key={poke.id}
                     id={poke.id}

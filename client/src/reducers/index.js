@@ -34,7 +34,7 @@ function rootReducer(state= initialState, action){
           console.log(thePoke)
           return{
             ...state,
-            pokemons:thePoke
+            allPokemons:thePoke
           }
 
 
@@ -81,33 +81,33 @@ function rootReducer(state= initialState, action){
           let top5Pokes= state.allPokemons;
           let topFivesPokes= action.payload ==='topweak'?
           top5Pokes.sort(function (a, b) {
-            if (a.attack=== null) {
+            if (a.height=== null) {
               return 0;
           }
-              if (a.attack > b.attack) {
+              if (a.height > b.height) {
                 return 1;
               }
-              if (a.attack < b.attack) {
+              if (a.height < b.height) {
                 return -1;
               }
               // a === b
               return 0;
             }) :
             top5Pokes.sort(function (a, b) {
-              if (a.attack === null) {
+              if (a.height === null) {
                 return 0;
             }
-              if (a.attack < b.attack) {
+              if (a.height < b.height) {
                 return 1;
               }
-              if (a.attack > b.attack) {
+              if (a.height > b.height) {
                 return -1;
               }        
               return 0;
             });
             return{
                 ...state,
-                pokemons:topFivesPokes.slice(0,5)
+                pokemons:topFivesPokes.slice(0,4)
             }
 
 
