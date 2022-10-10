@@ -4,6 +4,7 @@ import LandinPage from './components/LandingPage.jsx';
 import Home from './components/Home.jsx';
 import PokeCreate from './components/PokeCreate';
 import PokeDetails from './components/PokeDetails';
+import PokeRandom from './components/PokeRandom';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/home' component={Home}/>
         <Route path='/PokeCreate' component={PokeCreate} />
         <Route path='/pokeDetails/:id' component={PokeDetails}/>
+        <Route path='/PokeRandom' component={PokeRandom}/>
        </Switch>
       </div>
     </Router>

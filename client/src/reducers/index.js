@@ -1,13 +1,11 @@
 
-
-
 const initialState={
     pokemons:[],
     allPokemons:[],
     types: [],
-    error: null,
     pokeDetail:[],
-    loading:true
+    loading:true,
+    Poke_Random:[],
   
 }
 
@@ -23,18 +21,18 @@ function rootReducer(state= initialState, action){
             ...state,
             pokemons: action.payload, 
             allPokemons:action.payload, 
-            error: null,
             loading:false
 
         }
 
         case 'POKE_RANDOM':
           let pokeRandom=  state.pokemons;
+          //console.log(pokeRandom)
           let thePoke= pokeRandom[Math.floor(Math.random()* pokeRandom.length)]
-          console.log(thePoke)
+          // console.log(thePoke)
           return{
             ...state,
-            allPokemons:thePoke
+            Poke_Random:thePoke
           }
 
 
@@ -192,6 +190,9 @@ function rootReducer(state= initialState, action){
        
         default:
             return{...state}
+            
     }
+
 };
+
 export default rootReducer;

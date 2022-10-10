@@ -37,10 +37,10 @@ export function orderAttack(payload){
 }
 
 //EXTRAS
-export function pokeRandom(){
+export function pokeRandom(payload){
     return{
         type:'POKE_RANDOM',
-        
+        payload
     }
 }
 export function topFive(payload){

@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderAttack, topFive,pokeRandom} from '../actions';
+import { Link } from 'react-router-dom';
+import {getPokemons,filterCreated, orderAlfhabetic, getTypes,filterByType,orderAttack, topFive} from '../actions';
 import Card from './Card';
 import Pagination from './Pagination';
 import SearchBar from './SearchBar';
@@ -11,14 +12,14 @@ import PikaHass from '../components/Img&Gif/PikaHass.png';
 import BtnHaz from './buttons/btnHaz'
 function Home() {
     const dispatch= useDispatch();
-    const allPokemons= useSelector((state)=> state.pokemons);//pokemons viene del reducer, es el initial state
+    const allPokemons= useSelector((state)=> state.pokemons);
     const Load= useSelector((state)=>state.loading)
     const allTypes= useSelector((state)=>state.types)
 
     
     //PAGINADO
     const [currentPage, setCurrentPage]= useState(1);
-    const PokesForPage =12;//es el número de pokes por pagina
+    const PokesForPage =12;
     const lastPokePage= currentPage * PokesForPage;// 12
     const firstPokePage= lastPokePage - PokesForPage;//0
     const currentPokes= allPokemons.slice(firstPokePage, lastPokePage);
@@ -85,15 +86,7 @@ function handlerTop(e){
       setCurrentPage(1);
       setInput(1);
     }
-
-function handlerRandom (e){
-        e.preventDefault(e);
-        dispatch(pokeRandom());
-        setOrder(`Ordenado `)
-        setInput(1);
-        setCurrentPage(1);
-}
-    
+  
 return (
 
   <div className={style.home}>
@@ -126,9 +119,12 @@ return (
                 </button>
               </li>
               <li>
-                <button className={style.buttons} onClick={event=>{handlerRandom(event)}}>
+                <Link to={'/PokeRandom'}className={style.Link}  target="_blank">
+                <button className={style.buttons}
+                allPokemons={allPokemons}>
                   Poke Aleatorio
                 </button>
+                </Link>
               </li>
             </ul>
           </div>
