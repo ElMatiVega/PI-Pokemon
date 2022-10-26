@@ -119,7 +119,7 @@ return (
                 </button>
               </li>
               <li>
-                <Link to={'/PokeRandom'}className={style.Link}  target="_blank" >
+                <Link to={'/PokeRandom'}className={style.Link}  target="_blank">
                 <button className={style.buttons}
                 allPokemons={allPokemons}>
                   Poke Aleatorio

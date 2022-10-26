@@ -7,7 +7,7 @@ export function getPokemons(){
         dispatch({
             type:"WAITING",
         })
-        var json = await axios.get("/pokemons");//aca conecto con el Back
+        var json = await axios.get("http://localhost:3001/pokemons");//aca conecto con el Back
         return dispatch({
             type: 'GET_POKEMONS',
             payload:json.data,
@@ -63,7 +63,7 @@ export function filterByType (payload) {
 export function getNamePokemons(name){
     return async function(dispatch){
         try {
-            var pokeJson= await axios.get(`/pokemons?name=${name}`);
+            var pokeJson= await axios.get(`http://localhost:3001/pokemons?name=${name}`);
             return dispatch({
                 type:"GET_NAME_POKEMONS",
                 payload:pokeJson.data
@@ -80,7 +80,7 @@ export function getNamePokemons(name){
 
 export function getTypes(){
     return async function(dispatch){
-        var json = await axios.get("/types");
+        var json = await axios.get("http://localhost:3001/types");
        return dispatch({
            type:'GET_TYPE',
            payload: json.data, 
@@ -90,7 +90,7 @@ export function getTypes(){
 //Post para agregar un poke
 export function postPokemon(payload){
     return async function(dispatch){
-        const info= await axios.post("/pokemons",payload)
+        const info= await axios.post("http://localhost:3001/pokemons",payload)
         return info;
     }
 }
@@ -99,7 +99,7 @@ export function postPokemon(payload){
 export function  getDetail (id){
     return async function(dispatch){
         try {
-            var json= await axios.get(`/pokemons/${id}`)
+            var json= await axios.get(`http://localhost:3001/pokemons/${id}`)
             return dispatch({
                 type:"GET_DETAILS",
                 payload:json.data
@@ -114,7 +114,7 @@ export function deletePokemon(id){
     console.log(id,"soy la action")
     return async (dispatch) => {
       try {
-        const json = await axios.delete(`/pokemons/${id}`);
+        const json = await axios.delete(`http://localhost:3001/pokemons/${id}`);
         console.log(json, "soy el JSON")
         return dispatch({
           type: "DELETE_POKEMON",
